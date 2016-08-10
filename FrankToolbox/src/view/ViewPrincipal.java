@@ -8,6 +8,8 @@ package view;
 import java.beans.PropertyVetoException;
 import javax.swing.JInternalFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
+import Util.FileSystemModel;
+import java.io.File;
 
 /**
  *
@@ -18,6 +20,7 @@ public class ViewPrincipal extends javax.swing.JFrame
 
     public final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
     public final ViewHome viewHome = new ViewHome();
+    public final ViewFiltrar viewFiltrar = new ViewFiltrar();
 
     /**
      * Creates new form ViewPrincipal
@@ -36,14 +39,14 @@ public class ViewPrincipal extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTree1 = new javax.swing.JTree();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTree2 = new javax.swing.JTree();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -52,39 +55,13 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTree1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        javax.swing.tree.DefaultMutableTreeNode treeNode1 = new javax.swing.tree.DefaultMutableTreeNode("???");
-        javax.swing.tree.DefaultMutableTreeNode treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Arquivo");
-        javax.swing.tree.DefaultMutableTreeNode treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Importar");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Filtrar");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Fastx");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Mothur");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        treeNode2 = new javax.swing.tree.DefaultMutableTreeNode("Montar");
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("Abyss");
-        treeNode2.add(treeNode3);
-        treeNode3 = new javax.swing.tree.DefaultMutableTreeNode("SPAdes");
-        treeNode2.add(treeNode3);
-        treeNode1.add(treeNode2);
-        jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
-        jTree1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTree1MouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTree1);
-
         jDesktopPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 444, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,6 +78,11 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
         jButton2.setText("Filtrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics45x45.png"))); // NOI18N
         jButton3.setText("Montar");
@@ -115,7 +97,7 @@ public class ViewPrincipal extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -137,6 +119,9 @@ public class ViewPrincipal extends javax.swing.JFrame
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jTree2.setModel(new FileSystemModel(new File("/home/maverick/Documentos")));
+        jScrollPane2.setViewportView(jTree2);
 
         jMenu1.setText("Arquivo");
 
@@ -161,9 +146,9 @@ public class ViewPrincipal extends javax.swing.JFrame
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jDesktopPane1))
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,7 +160,7 @@ public class ViewPrincipal extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jDesktopPane1)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane2)))
         );
 
         pack();
@@ -185,31 +170,19 @@ public class ViewPrincipal extends javax.swing.JFrame
 
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
-    private void jTree1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree1MouseClicked
-
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) jTree1.getLastSelectedPathComponent();
-
-        if (node == null)
-            return;
-        if (!node.isLeaf())
-            return;
-
-        DefaultMutableTreeNode parent = (DefaultMutableTreeNode) node.getParent();
-        String no_filho = node.toString();
-        String no_pai = parent.toString();
-
-        if (no_filho.equals("Importar") && no_pai.endsWith("Arquivo"))
-            trocaTelas(viewImportarArquivo);
-    }//GEN-LAST:event_jTree1MouseClicked
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         trocaTelas(viewHome);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        trocaTelas(viewFiltrar);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     public void trocaTelas(JInternalFrame tela) {
 
         viewImportarArquivo.setVisible(false);
         viewHome.setVisible(false);
+        viewFiltrar.setVisible(false);
 
         if (tela != null) {
             tela.setVisible(true);
@@ -225,11 +198,13 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         jDesktopPane1.add(viewImportarArquivo);
         jDesktopPane1.add(viewHome);
+        jDesktopPane1.add(viewFiltrar);
 
         try {
 
             viewImportarArquivo.setMaximum(true);
             viewHome.setMaximum(true);
+            viewFiltrar.setMaximum(true);
 
         } catch (PropertyVetoException e) {
             System.err.println(" Exception maximizar internal\n " + e);
@@ -284,7 +259,7 @@ public class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTree jTree1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }
