@@ -8,6 +8,7 @@ package view;
 import Util.Internal;
 import java.io.File;
 import javax.swing.JFileChooser;
+import org.apache.commons.io.FilenameUtils;
 
 /**
  *
@@ -207,18 +208,18 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
                             .addComponent(jLabel8)
                             .addComponent(jLabel10))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton5)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel14))
                             .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jButton4)
                                 .addGap(18, 18, 18)
                                 .addComponent(jLabel13))
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jTextField4))))
                 .addContainerGap(252, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -250,7 +251,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
                     .addComponent(jLabel10)
                     .addComponent(jButton5)
                     .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
                 .addComponent(jButton6)
                 .addContainerGap())
         );
@@ -265,7 +266,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane4)
+            .addComponent(jTabbedPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
         );
 
         pack();
@@ -283,7 +284,10 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
 
             File selectedFile = chooserDiretorio.getSelectedFile();
             jLabelArquivoImportado.setText(selectedFile.getName());
-
+            String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
+            
+            jTextField3.setText(fileNameWithOutExt + "_trimmed." + FilenameUtils.getExtension(selectedFile.getName()));
+                                    
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -317,9 +321,15 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
 
             File selectedFile = chooserDiretorio.getSelectedFile();
             jLabel13.setText(selectedFile.getName());
+       
+            String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
+            jTextField4.setText(fileNameWithOutExt + "_filtered." + FilenameUtils.getExtension(selectedFile.getName()));
+            
 
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed

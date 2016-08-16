@@ -10,6 +10,7 @@ import javax.swing.JInternalFrame;
 import javax.swing.tree.DefaultMutableTreeNode;
 import Util.FileSystemModel;
 import java.io.File;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,16 +19,18 @@ import java.io.File;
 public class ViewPrincipal extends javax.swing.JFrame
 {
 
-    public final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
-    public final ViewHome viewHome = new ViewHome();
-    public final ViewFiltrar viewFiltrar = new ViewFiltrar();
+    public  final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
+    public  final ViewHome viewHome = new ViewHome();
+    public  final ViewFiltrar viewFiltrar = new ViewFiltrar();
+    public  final ViewMontador viewMontador = new ViewMontador();
 
     /**
      * Creates new form ViewPrincipal
      */
     public ViewPrincipal() {
         initComponents();
-        this.iniciarTelas();
+        iniciarTelas();
+        trocaTelas(viewHome);
     }
 
     /**
@@ -50,6 +53,8 @@ public class ViewPrincipal extends javax.swing.JFrame
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
 
@@ -61,7 +66,7 @@ public class ViewPrincipal extends javax.swing.JFrame
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 484, Short.MAX_VALUE)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,18 +91,22 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics45x45.png"))); // NOI18N
         jButton3.setText("Montar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA45x45.png"))); // NOI18N
-        jButton4.setText("Bin");
+        jButton4.setText("binning");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -114,8 +123,8 @@ public class ViewPrincipal extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
                     .addComponent(jButton4)
+                    .addComponent(jButton3)
                     .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -134,6 +143,18 @@ public class ViewPrincipal extends javax.swing.JFrame
         jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Configurações");
+
+        jMenuItem2.setText("Workspace");
+        jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem2MouseClicked(evt);
+            }
+        });
+        jMenu2.add(jMenuItem2);
+
+        jMenuBar1.add(jMenu2);
 
         jMenu3.setText("Sobre");
         jMenuBar1.add(jMenu3);
@@ -178,11 +199,20 @@ public class ViewPrincipal extends javax.swing.JFrame
         trocaTelas(viewFiltrar);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        trocaTelas(viewMontador);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
+        JOptionPane.showMessageDialog(null, "teste");
+    }//GEN-LAST:event_jMenuItem2MouseClicked
+
     public void trocaTelas(JInternalFrame tela) {
 
         viewImportarArquivo.setVisible(false);
         viewHome.setVisible(false);
         viewFiltrar.setVisible(false);
+        viewMontador.setVisible(false);
 
         if (tela != null) {
             tela.setVisible(true);
@@ -193,18 +223,20 @@ public class ViewPrincipal extends javax.swing.JFrame
             }
         }
     }
-
+    
     private void iniciarTelas() {
 
         jDesktopPane1.add(viewImportarArquivo);
         jDesktopPane1.add(viewHome);
         jDesktopPane1.add(viewFiltrar);
+        jDesktopPane1.add(viewMontador);
 
         try {
 
             viewImportarArquivo.setMaximum(true);
             viewHome.setMaximum(true);
             viewFiltrar.setMaximum(true);
+            viewMontador.setMaximum(true);
 
         } catch (PropertyVetoException e) {
             System.err.println(" Exception maximizar internal\n " + e);
@@ -254,10 +286,12 @@ public class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JButton jButton4;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree2;
