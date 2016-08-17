@@ -5,11 +5,10 @@
  */
 package view;
 
-import java.beans.PropertyVetoException;
-import javax.swing.JInternalFrame;
-import javax.swing.tree.DefaultMutableTreeNode;
 import Util.FileSystemModel;
+import java.beans.PropertyVetoException;
 import java.io.File;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,10 +18,11 @@ import javax.swing.JOptionPane;
 public class ViewPrincipal extends javax.swing.JFrame
 {
 
-    public  final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
-    public  final ViewHome viewHome = new ViewHome();
-    public  final ViewFiltrar viewFiltrar = new ViewFiltrar();
-    public  final ViewMontador viewMontador = new ViewMontador();
+    public final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
+    public final ViewHome viewHome = new ViewHome();
+    public final ViewFiltrar viewFiltrar = new ViewFiltrar();
+    public final ViewMontador viewMontador = new ViewMontador();
+    ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
 
     /**
      * Creates new form ViewPrincipal
@@ -48,6 +48,7 @@ public class ViewPrincipal extends javax.swing.JFrame
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree2 = new javax.swing.JTree();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -81,7 +82,7 @@ public class ViewPrincipal extends javax.swing.JFrame
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/filter-icon45x45.png"))); // NOI18N
         jButton2.setText("Filtrar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,7 +99,10 @@ public class ViewPrincipal extends javax.swing.JFrame
         });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA45x45.png"))); // NOI18N
-        jButton4.setText("binning");
+        jButton4.setText("Binning");
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
+        jButton5.setText("Visualizar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,6 +111,8 @@ public class ViewPrincipal extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton3)
@@ -125,7 +131,8 @@ public class ViewPrincipal extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton3)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(jButton5))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -150,6 +157,11 @@ public class ViewPrincipal extends javax.swing.JFrame
         jMenuItem2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jMenuItem2MouseClicked(evt);
+            }
+        });
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
@@ -207,6 +219,17 @@ public class ViewPrincipal extends javax.swing.JFrame
         JOptionPane.showMessageDialog(null, "teste");
     }//GEN-LAST:event_jMenuItem2MouseClicked
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+
+        viewWorkspace.setVisible(true);
+        createRoot(viewWorkspace.getPath());
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    public void createRoot(String path) {
+        jTree2.setModel(new FileSystemModel(new File(path)));
+        jScrollPane2.setViewportView(jTree2);
+    }
+
     public void trocaTelas(JInternalFrame tela) {
 
         viewImportarArquivo.setVisible(false);
@@ -223,7 +246,7 @@ public class ViewPrincipal extends javax.swing.JFrame
             }
         }
     }
-    
+
     private void iniciarTelas() {
 
         jDesktopPane1.add(viewImportarArquivo);
@@ -284,6 +307,7 @@ public class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

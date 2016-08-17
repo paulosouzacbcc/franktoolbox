@@ -14,7 +14,8 @@ import org.apache.commons.io.FilenameUtils;
  *
  * @author maverick
  */
-public class ViewFiltrar extends javax.swing.JInternalFrame {
+public class ViewFiltrar extends javax.swing.JInternalFrame
+{
 
     /**
      * Creates new form ViewFiltrar
@@ -243,9 +244,9 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
                     .addComponent(jButton4)
                     .addComponent(jLabel8))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
@@ -273,8 +274,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        
-        
+
         int resultado;
         JFileChooser chooserDiretorio = new JFileChooser();
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
@@ -285,22 +285,20 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
             File selectedFile = chooserDiretorio.getSelectedFile();
             jLabelArquivoImportado.setText(selectedFile.getName());
             String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
-            
+
             jTextField3.setText(fileNameWithOutExt + "_trimmed." + FilenameUtils.getExtension(selectedFile.getName()));
-                                    
+
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        
-         
+
         int resultado;
         JFileChooser chooserDiretorio = new JFileChooser();
         chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
-        
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
 
@@ -312,7 +310,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-         int resultado;
+        int resultado;
         JFileChooser chooserDiretorio = new JFileChooser();
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
@@ -321,24 +319,21 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
 
             File selectedFile = chooserDiretorio.getSelectedFile();
             jLabel13.setText(selectedFile.getName());
-       
+
             String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
             jTextField4.setText(fileNameWithOutExt + "_filtered." + FilenameUtils.getExtension(selectedFile.getName()));
-            
 
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
-        
-        
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-         int resultado;
+        int resultado;
         JFileChooser chooserDiretorio = new JFileChooser();
         chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
-        
 
         if (resultado == JFileChooser.APPROVE_OPTION) {
 
@@ -348,7 +343,6 @@ public class ViewFiltrar extends javax.swing.JInternalFrame {
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
     }//GEN-LAST:event_jButton5ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
