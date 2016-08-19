@@ -6,10 +6,18 @@
 package view;
 
 import Util.FileSystemModel;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
+import java.util.Arrays;
 import javax.swing.JInternalFrame;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.TreePath;
 
 /**
  *
@@ -31,8 +39,21 @@ public class ViewPrincipal extends javax.swing.JFrame
         initComponents();
         iniciarTelas();
         trocaTelas(viewHome);
+        
+        
     }
 
+    public  void setInvisibleBarraHorizontal(){
+        
+        jButtonBinning.setVisible(false);
+        jButtonFiltrar.setVisible(false);
+        jButtonHome.setVisible(false);
+        jButtonMontar.setVisible(false);
+        jButtonVisualizar.setVisible(false);
+    }
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,11 +65,11 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButtonHome = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
+        jButtonMontar = new javax.swing.JButton();
+        jButtonBinning = new javax.swing.JButton();
+        jButtonVisualizar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree2 = new javax.swing.JTree();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -74,69 +95,74 @@ public class ViewPrincipal extends javax.swing.JFrame
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home45x45.png"))); // NOI18N
-        jButton1.setText("Home");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/home45x45.png"))); // NOI18N
+        jButtonHome.setText("Home");
+        jButtonHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonHomeActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/filter-icon45x45.png"))); // NOI18N
-        jButton2.setText("Filtrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/filter-icon45x45.png"))); // NOI18N
+        jButtonFiltrar.setText("Filtrar");
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jButtonFiltrarActionPerformed(evt);
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics45x45.png"))); // NOI18N
-        jButton3.setText("Montar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMontar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics45x45.png"))); // NOI18N
+        jButtonMontar.setText("Montar");
+        jButtonMontar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jButtonMontarActionPerformed(evt);
             }
         });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA45x45.png"))); // NOI18N
-        jButton4.setText("Binning");
+        jButtonBinning.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA45x45.png"))); // NOI18N
+        jButtonBinning.setText("Binning");
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
-        jButton5.setText("Visualizar");
+        jButtonVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
+        jButtonVisualizar.setText("Visualizar");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jButton1)
+                .addComponent(jButtonHome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(jButtonVisualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(jButtonFiltrar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(jButtonMontar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(jButtonBinning)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonHome)
                 .addGap(20, 20, 20))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton5))
+                    .addComponent(jButtonBinning)
+                    .addComponent(jButtonMontar)
+                    .addComponent(jButtonFiltrar)
+                    .addComponent(jButtonVisualizar))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTree2.setModel(new FileSystemModel(new File("/home/maverick/Documentos")));
+        jTree2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTree2MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTree2);
 
         jMenu1.setText("Arquivo");
@@ -203,17 +229,19 @@ public class ViewPrincipal extends javax.swing.JFrame
 
     }//GEN-LAST:event_jMenuItem1MouseClicked
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHomeActionPerformed
         trocaTelas(viewHome);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        setInvisibleBarraHorizontal();
+        
+    }//GEN-LAST:event_jButtonHomeActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
         trocaTelas(viewFiltrar);
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButtonMontarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontarActionPerformed
         trocaTelas(viewMontador);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_jButtonMontarActionPerformed
 
     private void jMenuItem2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem2MouseClicked
         JOptionPane.showMessageDialog(null, "teste");
@@ -224,6 +252,42 @@ public class ViewPrincipal extends javax.swing.JFrame
         viewWorkspace.setVisible(true);
         createRoot(viewWorkspace.getPath());
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jTree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MouseClicked
+        if(evt.getButton() == MouseEvent.BUTTON3) {
+
+            jTree2.addMouseListener ( new MouseAdapter ()
+    { 
+        public void mousePressed ( MouseEvent e )
+        { 
+            if ( SwingUtilities.isRightMouseButton ( e ) )
+            { 
+                TreePath path = jTree2.getPathForLocation ( e.getX (), e.getY () );
+                Rectangle pathBounds = jTree2.getUI ().getPathBounds ( jTree2, path );
+                if ( pathBounds != null && pathBounds.contains ( e.getX (), e.getY () ) )
+                { 
+                    JPopupMenu menu = new JPopupMenu ();
+                    menu.add(new JMenuItem ("Criar Pasta"));
+                    menu.add(new JMenuItem ("Remover Pasta"));
+                    menu.show (jTree2, pathBounds.x, pathBounds.y + pathBounds.height );
+                    
+                    
+                    
+                } 
+            } 
+        } 
+    } );
+            System.out.println(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
+            jTree2.setSelectionRow(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
+            
+            
+            
+            TreePath s = jTree2.getSelectionPath();
+        }
+        
+         
+    
+    }//GEN-LAST:event_jTree2MouseClicked
 
     public void createRoot(String path) {
         jTree2.setModel(new FileSystemModel(new File(path)));
@@ -303,11 +367,11 @@ public class ViewPrincipal extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButtonBinning;
+    private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonHome;
+    private javax.swing.JButton jButtonMontar;
+    private javax.swing.JButton jButtonVisualizar;
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
