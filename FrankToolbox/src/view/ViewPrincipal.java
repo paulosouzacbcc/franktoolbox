@@ -11,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
-import java.util.Arrays;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -23,13 +22,13 @@ import javax.swing.tree.TreePath;
  *
  * @author maverick
  */
-public class ViewPrincipal extends javax.swing.JFrame
+public final class ViewPrincipal extends javax.swing.JFrame
 {
 
-    public final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
-    public final ViewHome viewHome = new ViewHome();
-    public final ViewFiltrar viewFiltrar = new ViewFiltrar();
-    public final ViewMontador viewMontador = new ViewMontador();
+    public static final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
+    public static final ViewHome viewHome = new ViewHome();
+    public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
+    public static final ViewMontador viewMontador = new ViewMontador();
     ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
 
     /**
@@ -39,21 +38,24 @@ public class ViewPrincipal extends javax.swing.JFrame
         initComponents();
         iniciarTelas();
         trocaTelas(viewHome);
-        
-        
+
     }
 
-    public  void setInvisibleBarraHorizontal(){
-        
+    public void setInvisibleBarraHorizontal() {
+
         jButtonBinning.setVisible(false);
         jButtonFiltrar.setVisible(false);
-        jButtonHome.setVisible(false);
         jButtonMontar.setVisible(false);
         jButtonVisualizar.setVisible(false);
+        showLogoLabiocadHome();
+
     }
-    
-    
-    
+
+    public void showLogoLabiocadHome() {
+        jLabelLogoLabiocad.setVisible(true);
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -63,13 +65,14 @@ public class ViewPrincipal extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jPanel1 = new javax.swing.JPanel();
+        jDesktopPanePrincipal = new javax.swing.JDesktopPane();
+        jPanelBarraHorizontal = new javax.swing.JPanel();
         jButtonHome = new javax.swing.JButton();
         jButtonFiltrar = new javax.swing.JButton();
         jButtonMontar = new javax.swing.JButton();
         jButtonBinning = new javax.swing.JButton();
         jButtonVisualizar = new javax.swing.JButton();
+        jLabelLogoLabiocad = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree2 = new javax.swing.JTree();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -82,16 +85,16 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jDesktopPane1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jDesktopPanePrincipal.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 484, Short.MAX_VALUE)
+        javax.swing.GroupLayout jDesktopPanePrincipalLayout = new javax.swing.GroupLayout(jDesktopPanePrincipal);
+        jDesktopPanePrincipal.setLayout(jDesktopPanePrincipalLayout);
+        jDesktopPanePrincipalLayout.setHorizontalGroup(
+            jDesktopPanePrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jDesktopPanePrincipalLayout.setVerticalGroup(
+            jDesktopPanePrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -124,14 +127,25 @@ public class ViewPrincipal extends javax.swing.JFrame
 
         jButtonVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis45x45.png"))); // NOI18N
         jButtonVisualizar.setText("Visualizar");
+        jButtonVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVisualizarActionPerformed(evt);
+            }
+        });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jLabelLogoLabiocad.setVisible(false);
+        jLabelLogoLabiocad.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelLogoLabiocad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/labiocad250x37.png"))); // NOI18N
+
+        javax.swing.GroupLayout jPanelBarraHorizontalLayout = new javax.swing.GroupLayout(jPanelBarraHorizontal);
+        jPanelBarraHorizontal.setLayout(jPanelBarraHorizontalLayout);
+        jPanelBarraHorizontalLayout.setHorizontalGroup(
+            jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
                 .addComponent(jButtonHome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addComponent(jLabelLogoLabiocad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVisualizar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonFiltrar)
@@ -141,19 +155,22 @@ public class ViewPrincipal extends javax.swing.JFrame
                 .addComponent(jButtonBinning)
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        jPanelBarraHorizontalLayout.setVerticalGroup(
+            jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelBarraHorizontalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonHome)
                 .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonBinning)
                     .addComponent(jButtonMontar)
                     .addComponent(jButtonFiltrar)
-                    .addComponent(jButtonVisualizar))
+                    .addComponent(jButtonVisualizar)
+                    .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabelLogoLabiocad)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -209,20 +226,21 @@ public class ViewPrincipal extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1))
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jDesktopPanePrincipal))
+            .addComponent(jPanelBarraHorizontal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelBarraHorizontal, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDesktopPane1)
+                    .addComponent(jDesktopPanePrincipal)
                     .addComponent(jScrollPane2)))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem1MouseClicked
@@ -232,7 +250,7 @@ public class ViewPrincipal extends javax.swing.JFrame
     private void jButtonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHomeActionPerformed
         trocaTelas(viewHome);
         setInvisibleBarraHorizontal();
-        
+
     }//GEN-LAST:event_jButtonHomeActionPerformed
 
     private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
@@ -254,47 +272,42 @@ public class ViewPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MouseClicked
-        if(evt.getButton() == MouseEvent.BUTTON3) {
+        if (evt.getButton() == MouseEvent.BUTTON3) {
 
-            jTree2.addMouseListener ( new MouseAdapter ()
-    { 
-        public void mousePressed ( MouseEvent e )
-        { 
-            if ( SwingUtilities.isRightMouseButton ( e ) )
-            { 
-                TreePath path = jTree2.getPathForLocation ( e.getX (), e.getY () );
-                Rectangle pathBounds = jTree2.getUI ().getPathBounds ( jTree2, path );
-                if ( pathBounds != null && pathBounds.contains ( e.getX (), e.getY () ) )
-                { 
-                    JPopupMenu menu = new JPopupMenu ();
-                    menu.add(new JMenuItem ("Criar Pasta"));
-                    menu.add(new JMenuItem ("Remover Pasta"));
-                    menu.show (jTree2, pathBounds.x, pathBounds.y + pathBounds.height );
-                    
-                    
-                    
-                } 
-            } 
-        } 
-    } );
+            jTree2.addMouseListener(new MouseAdapter()
+            {
+                public void mousePressed(MouseEvent e) {
+                    if (SwingUtilities.isRightMouseButton(e)) {
+                        TreePath path = jTree2.getPathForLocation(e.getX(), e.getY());
+                        Rectangle pathBounds = jTree2.getUI().getPathBounds(jTree2, path);
+                        if (pathBounds != null && pathBounds.contains(e.getX(), e.getY())) {
+                            JPopupMenu menu = new JPopupMenu();
+                            menu.add(new JMenuItem("Criar Pasta"));
+                            menu.add(new JMenuItem("Remover Pasta"));
+                            menu.show(jTree2, pathBounds.x, pathBounds.y + pathBounds.height);
+
+                        }
+                    }
+                }
+            });
             System.out.println(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
             jTree2.setSelectionRow(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
-            
-            
-            
+
             TreePath s = jTree2.getSelectionPath();
         }
-        
-         
-    
+
     }//GEN-LAST:event_jTree2MouseClicked
+
+    private void jButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonVisualizarActionPerformed
 
     public void createRoot(String path) {
         jTree2.setModel(new FileSystemModel(new File(path)));
         jScrollPane2.setViewportView(jTree2);
     }
 
-    public void trocaTelas(JInternalFrame tela) {
+    public static void trocaTelas(JInternalFrame tela) {
 
         viewImportarArquivo.setVisible(false);
         viewHome.setVisible(false);
@@ -311,12 +324,12 @@ public class ViewPrincipal extends javax.swing.JFrame
         }
     }
 
-    private void iniciarTelas() {
+    public void iniciarTelas() {
 
-        jDesktopPane1.add(viewImportarArquivo);
-        jDesktopPane1.add(viewHome);
-        jDesktopPane1.add(viewFiltrar);
-        jDesktopPane1.add(viewMontador);
+        jDesktopPanePrincipal.add(viewImportarArquivo);
+        jDesktopPanePrincipal.add(viewHome);
+        jDesktopPanePrincipal.add(viewFiltrar);
+        jDesktopPanePrincipal.add(viewMontador);
 
         try {
 
@@ -372,7 +385,8 @@ public class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JButton jButtonHome;
     private javax.swing.JButton jButtonMontar;
     private javax.swing.JButton jButtonVisualizar;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    public static javax.swing.JDesktopPane jDesktopPanePrincipal;
+    private javax.swing.JLabel jLabelLogoLabiocad;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -380,7 +394,7 @@ public class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelBarraHorizontal;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables

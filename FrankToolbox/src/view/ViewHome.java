@@ -6,6 +6,7 @@
 package view;
 
 import Util.Internal;
+import static view.ViewPrincipal.jDesktopPanePrincipal;
 
 /**
  *
@@ -17,8 +18,6 @@ public class ViewHome extends javax.swing.JInternalFrame
     /**
      * Creates new form ViewHome
      */
-    ViewFiltrar viewFiltrar = new ViewFiltrar();
-
     public ViewHome() {
         initComponents();
         Internal.retiraBotao(this);
@@ -33,25 +32,25 @@ public class ViewHome extends javax.swing.JInternalFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jButtonFiltrar = new javax.swing.JButton();
+        jButtonMontar = new javax.swing.JButton();
+        jButtonBinning = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
+        jButtonVisualizar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/filter-icon100x100.png"))); // NOI18N
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonFiltrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/filter-icon100x100.png"))); // NOI18N
+        jButtonFiltrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonFiltrarActionPerformed(evt);
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics100x100.png"))); // NOI18N
+        jButtonMontar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics100x100.png"))); // NOI18N
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA100x100.png"))); // NOI18N
+        jButtonBinning.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA100x100.png"))); // NOI18N
 
         jLabel2.setText("Montar");
 
@@ -59,7 +58,12 @@ public class ViewHome extends javax.swing.JInternalFrame
 
         jLabel4.setText("Filtrar");
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis100x100.png"))); // NOI18N
+        jButtonVisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA_analysis100x100.png"))); // NOI18N
+        jButtonVisualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonVisualizarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Visualizar");
 
@@ -73,18 +77,18 @@ public class ViewHome extends javax.swing.JInternalFrame
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(jButtonFiltrar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 157, Short.MAX_VALUE)
-                                .addComponent(jButton3))
+                                .addComponent(jButtonBinning))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(44, 44, 44)
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton4)
+                                .addComponent(jButtonVisualizar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton2)))
+                                .addComponent(jButtonMontar)))
                         .addGap(154, 154, 154))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
@@ -98,8 +102,8 @@ public class ViewHome extends javax.swing.JInternalFrame
             .addGroup(layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4))
+                    .addComponent(jButtonMontar)
+                    .addComponent(jButtonVisualizar))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -107,8 +111,8 @@ public class ViewHome extends javax.swing.JInternalFrame
                             .addComponent(jLabel2)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addComponent(jButton1))
+                        .addComponent(jButtonBinning))
+                    .addComponent(jButtonFiltrar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -119,15 +123,22 @@ public class ViewHome extends javax.swing.JInternalFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButtonFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFiltrarActionPerformed
+        ViewFiltrar viewFiltrar = new ViewFiltrar();
+        jDesktopPanePrincipal.add(viewFiltrar);
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+        ViewPrincipal.trocaTelas(viewFiltrar);
+    }//GEN-LAST:event_jButtonFiltrarActionPerformed
+
+    private void jButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizarActionPerformed
+
+    }//GEN-LAST:event_jButtonVisualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonBinning;
+    private javax.swing.JButton jButtonFiltrar;
+    private javax.swing.JButton jButtonMontar;
+    private javax.swing.JButton jButtonVisualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
