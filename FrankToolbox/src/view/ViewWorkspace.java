@@ -6,13 +6,13 @@
 package view;
 
 import javax.swing.JFileChooser;
+import util.Alert;
 
 /**
  *
  * @author Paulo Soza
  */
-public class ViewWorkspace extends javax.swing.JDialog
-{
+public class ViewWorkspace extends javax.swing.JDialog {
 
     /**
      * Creates new form ViewWorkspace
@@ -49,6 +49,8 @@ public class ViewWorkspace extends javax.swing.JDialog
             }
         });
 
+        jTextField1.setEditable(false);
+
         jButton2.setText("Salvar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -76,7 +78,7 @@ public class ViewWorkspace extends javax.swing.JDialog
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jButton2))
         );
 
@@ -111,14 +113,15 @@ public class ViewWorkspace extends javax.swing.JDialog
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
 
         if (!jTextField1.getText().isEmpty()) {
 
             ViewPrincipal viewPrincipal = new ViewPrincipal();
             viewPrincipal.createRoot(getPath());
+            this.dispose();
 
-        }
+        } else
+            Alert.warning("Você deve selecionar um diretório", "Selecionar Diretório");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -154,12 +157,10 @@ public class ViewWorkspace extends javax.swing.JDialog
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 ViewWorkspace dialog = new ViewWorkspace(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter()
-                {
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

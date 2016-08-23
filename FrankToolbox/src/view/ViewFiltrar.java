@@ -5,7 +5,7 @@
  */
 package view;
 
-import Util.Internal;
+import util.Internal;
 import java.io.File;
 import javax.swing.JFileChooser;
 import org.apache.commons.io.FilenameUtils;

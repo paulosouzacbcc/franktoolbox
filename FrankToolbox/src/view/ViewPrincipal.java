@@ -5,8 +5,9 @@
  */
 package view;
 
-import Util.FileSystemModel;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
@@ -15,21 +16,24 @@ import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;
+import util.FileSystemModel;
 
 /**
  *
  * @author maverick
  */
-public final class ViewPrincipal extends javax.swing.JFrame
-{
+public final class ViewPrincipal extends javax.swing.JFrame {
 
     public static final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
     public static final ViewHome viewHome = new ViewHome();
     public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
     public static final ViewMontador viewMontador = new ViewMontador();
     ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
+    public static String ROOT;
+    public static String LAST_COMPONENT_ROOT;
 
     /**
      * Creates new form ViewPrincipal
@@ -38,21 +42,28 @@ public final class ViewPrincipal extends javax.swing.JFrame
         initComponents();
         iniciarTelas();
         trocaTelas(viewHome);
+        visibilidadeBarraHorizontal(false);
+        showLogoLabiocadHome(true);
 
     }
 
-    public void setInvisibleBarraHorizontal() {
+    public static void visibilidadeBarraHorizontal(boolean boleano) {
 
-        jButtonBinning.setVisible(false);
-        jButtonFiltrar.setVisible(false);
-        jButtonMontar.setVisible(false);
-        jButtonVisualizar.setVisible(false);
-        showLogoLabiocadHome();
+        jButtonBinning.setVisible(boleano);
+        jButtonFiltrar.setVisible(boleano);
+        jButtonMontar.setVisible(boleano);
+        jButtonVisualizar.setVisible(boleano);
 
     }
 
-    public void showLogoLabiocadHome() {
-        jLabelLogoLabiocad.setVisible(true);
+    public static void showLogoLabiocadHome(boolean boleano) {
+        jLabelLogoLabiocad.setVisible(boleano);
+
+    }
+
+    public static void refreshTree() {
+
+        jTree2.setModel(new FileSystemModel(new File("/home/maverick/Documentos")));
 
     }
 
@@ -143,7 +154,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
             jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
                 .addComponent(jButtonHome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelLogoLabiocad)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonVisualizar)
@@ -163,14 +174,15 @@ public final class ViewPrincipal extends javax.swing.JFrame
                 .addGap(20, 20, 20))
             .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonBinning)
-                    .addComponent(jButtonMontar)
-                    .addComponent(jButtonFiltrar)
-                    .addComponent(jButtonVisualizar)
+                .addGroup(jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelBarraHorizontalLayout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(jLabelLogoLabiocad)))
+                        .addComponent(jLabelLogoLabiocad))
+                    .addGroup(jPanelBarraHorizontalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonBinning)
+                        .addComponent(jButtonMontar)
+                        .addComponent(jButtonFiltrar)
+                        .addComponent(jButtonVisualizar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -249,7 +261,8 @@ public final class ViewPrincipal extends javax.swing.JFrame
 
     private void jButtonHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHomeActionPerformed
         trocaTelas(viewHome);
-        setInvisibleBarraHorizontal();
+        visibilidadeBarraHorizontal(false);
+        showLogoLabiocadHome(true);
 
     }//GEN-LAST:event_jButtonHomeActionPerformed
 
@@ -274,26 +287,52 @@ public final class ViewPrincipal extends javax.swing.JFrame
     private void jTree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MouseClicked
         if (evt.getButton() == MouseEvent.BUTTON3) {
 
-            jTree2.addMouseListener(new MouseAdapter()
-            {
+            jTree2.addMouseListener(new MouseAdapter() {
                 public void mousePressed(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         TreePath path = jTree2.getPathForLocation(e.getX(), e.getY());
                         Rectangle pathBounds = jTree2.getUI().getPathBounds(jTree2, path);
                         if (pathBounds != null && pathBounds.contains(e.getX(), e.getY())) {
+
                             JPopupMenu menu = new JPopupMenu();
-                            menu.add(new JMenuItem("Criar Pasta"));
-                            menu.add(new JMenuItem("Remover Pasta"));
+                            JMenuItem itemCriarPasta = new JMenuItem("Criar Pasta");
+                            JMenuItem itemRemover = new JMenuItem("Remover");
+
+                            itemCriarPasta.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+
+                                    System.out.println("Criar Pasta");
+                                    ViewCriarPasta viewCriarPasta = new ViewCriarPasta(null, true);
+                                    viewCriarPasta.setVisible(true);
+
+                                }
+                            });
+
+                            itemRemover.addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    System.out.println("Remover");
+                                }
+                            });
+
+                            menu.add(itemCriarPasta);
+                            add(new JSeparator());
+                            menu.add(itemRemover);
                             menu.show(jTree2, pathBounds.x, pathBounds.y + pathBounds.height);
 
                         }
                     }
                 }
             });
-            System.out.println(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
+
+            ROOT = jTree2.getSelectionPath().getParentPath().getLastPathComponent().toString();
+            LAST_COMPONENT_ROOT = jTree2.getSelectionPath().getLastPathComponent().toString();
+
+            //ROOT = ROOT + "/" + LAST_COMPONENT_ROOT;
             jTree2.setSelectionRow(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
 
-            TreePath s = jTree2.getSelectionPath();
+            System.out.println("ViewPrincipal " + ROOT);
         }
 
     }//GEN-LAST:event_jTree2MouseClicked
@@ -302,9 +341,13 @@ public final class ViewPrincipal extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonVisualizarActionPerformed
 
-    public void createRoot(String path) {
-        jTree2.setModel(new FileSystemModel(new File(path)));
-        jScrollPane2.setViewportView(jTree2);
+    public static void createRoot(String path) {
+
+        if (!path.isEmpty()) {
+            jTree2.setModel(new FileSystemModel(new File(path)));
+            jScrollPane2.setViewportView(jTree2);
+        }
+
     }
 
     public static void trocaTelas(JInternalFrame tela) {
@@ -371,8 +414,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
+        java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ViewPrincipal().setVisible(true);
             }
@@ -380,13 +422,13 @@ public final class ViewPrincipal extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonBinning;
-    private javax.swing.JButton jButtonFiltrar;
+    public static javax.swing.JButton jButtonBinning;
+    public static javax.swing.JButton jButtonFiltrar;
     private javax.swing.JButton jButtonHome;
-    private javax.swing.JButton jButtonMontar;
-    private javax.swing.JButton jButtonVisualizar;
+    public static javax.swing.JButton jButtonMontar;
+    public static javax.swing.JButton jButtonVisualizar;
     public static javax.swing.JDesktopPane jDesktopPanePrincipal;
-    private javax.swing.JLabel jLabelLogoLabiocad;
+    public static javax.swing.JLabel jLabelLogoLabiocad;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -395,7 +437,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanelBarraHorizontal;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTree jTree2;
+    public static javax.swing.JScrollPane jScrollPane2;
+    public static javax.swing.JTree jTree2;
     // End of variables declaration//GEN-END:variables
 }

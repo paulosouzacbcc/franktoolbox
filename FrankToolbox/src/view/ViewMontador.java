@@ -5,7 +5,7 @@
  */
 package view;
 
-import Util.Internal;
+import util.Internal;
 
 /**
  *

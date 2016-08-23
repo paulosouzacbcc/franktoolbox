@@ -5,8 +5,8 @@
  */
 package view;
 
-import Util.Alert;
-import Util.Internal;
+import util.Alert;
+import util.Internal;
 import java.io.File;
 import javax.swing.JFileChooser;
 

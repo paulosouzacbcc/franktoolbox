@@ -5,15 +5,14 @@
  */
 package view;
 
-import Util.Internal;
+import util.Internal;
 import static view.ViewPrincipal.jDesktopPanePrincipal;
 
 /**
  *
  * @author Paulo Soza
  */
-public class ViewHome extends javax.swing.JInternalFrame
-{
+public class ViewHome extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form ViewHome
@@ -21,6 +20,7 @@ public class ViewHome extends javax.swing.JInternalFrame
     public ViewHome() {
         initComponents();
         Internal.retiraBotao(this);
+
     }
 
     /**
@@ -49,8 +49,18 @@ public class ViewHome extends javax.swing.JInternalFrame
         });
 
         jButtonMontar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/genetics100x100.png"))); // NOI18N
+        jButtonMontar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMontarActionPerformed(evt);
+            }
+        });
 
         jButtonBinning.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/DNA100x100.png"))); // NOI18N
+        jButtonBinning.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBinningActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Montar");
 
@@ -128,11 +138,31 @@ public class ViewHome extends javax.swing.JInternalFrame
         jDesktopPanePrincipal.add(viewFiltrar);
 
         ViewPrincipal.trocaTelas(viewFiltrar);
+        ViewPrincipal.showLogoLabiocadHome(false);
+        ViewPrincipal.visibilidadeBarraHorizontal(true);
+
     }//GEN-LAST:event_jButtonFiltrarActionPerformed
 
     private void jButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizarActionPerformed
 
+        ViewPrincipal viewPrincipal = new ViewPrincipal();
+        viewPrincipal.visibilidadeBarraHorizontal(true);
     }//GEN-LAST:event_jButtonVisualizarActionPerformed
+
+    private void jButtonMontarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontarActionPerformed
+        ViewMontador viewMontador = new ViewMontador();
+        jDesktopPanePrincipal.add(viewMontador);
+        ViewPrincipal.trocaTelas(viewMontador);
+        ViewPrincipal.showLogoLabiocadHome(false);
+        ViewPrincipal.visibilidadeBarraHorizontal(true);
+
+    }//GEN-LAST:event_jButtonMontarActionPerformed
+
+    private void jButtonBinningActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBinningActionPerformed
+
+        ViewPrincipal viewPrincipal = new ViewPrincipal();
+        viewPrincipal.visibilidadeBarraHorizontal(true);
+    }//GEN-LAST:event_jButtonBinningActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBinning;
