@@ -6,6 +6,7 @@
 package view;
 
 import javax.swing.JFileChooser;
+import util.Alert;
 
 /**
  *
@@ -125,10 +126,16 @@ public class ViewWorkspacePrincipal extends javax.swing.JDialog
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        ViewPrincipal viewPrincipal = new ViewPrincipal();
-        viewPrincipal.createRoot(getPath());
-        viewPrincipal.setVisible(true);
-        this.dispose();
+        if (jTextField1.getText().isEmpty()){
+            Alert.error("Você deve selecionar um diretório", "Selecionar Workspace");
+        }else{
+            ViewPrincipal viewPrincipal = new ViewPrincipal();
+            viewPrincipal.createRoot(getPath());
+            viewPrincipal.ROOTWOKSPACE = getPath();
+            viewPrincipal.setVisible(true);
+            this.dispose();
+        }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     public String getPath() {

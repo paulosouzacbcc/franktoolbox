@@ -40,6 +40,8 @@ public class ViewCriarPasta extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Criar Pasta", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
         jButtonCancelar.setText("Cancelar");
         jButtonCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +68,7 @@ public class ViewCriarPasta extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGap(0, 12, Short.MAX_VALUE)
                         .addComponent(jButtonSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonCancelar))
@@ -80,7 +82,7 @@ public class ViewCriarPasta extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldNomePasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 36, Short.MAX_VALUE)
+                .addGap(18, 59, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonCancelar)
                     .addComponent(jButtonSalvar))
@@ -156,15 +158,16 @@ public class ViewCriarPasta extends javax.swing.JDialog {
 
     public void criarPasta() {
 
-        //TODO check para testar se lastComponent é um diretorio
-        System.out.println("viewCriarPasta " + ViewPrincipal.ROOT + "/" + jTextFieldNomePasta.getText());
+        
+        
         try {
-
-            File file = new File(ViewPrincipal.ROOT + "/" + ViewPrincipal.LAST_COMPONENT_ROOT + "/" + jTextFieldNomePasta.getText());
+            System.out.println("CriarP" +ViewPrincipal.ROOT);
+            File file = new File(ViewPrincipal.ROOT + "/" + jTextFieldNomePasta.getText());
+            
             if (!file.exists())
                 if (file.mkdir()) {
                     Alert.sucess("Sucesso ao criar diretório!", "Criar Pasta");
-                    ViewPrincipal.createRoot(ViewPrincipal.ROOT);
+                    ViewPrincipal.createRoot(ViewPrincipal.ROOTWOKSPACE);
 
                     this.dispose();
                 } else

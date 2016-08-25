@@ -19,6 +19,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.TreePath;
+import util.Alert;
 import util.FileSystemModel;
 
 /**
@@ -32,8 +33,10 @@ public final class ViewPrincipal extends javax.swing.JFrame {
     public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
     public static final ViewMontador viewMontador = new ViewMontador();
     ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
-    public static String ROOT;
+    public static String ROOT = "".trim();
+    public static String ROOTWOKSPACE;
     public static String LAST_COMPONENT_ROOT;
+    public static int XY;
 
     /**
      * Creates new form ViewPrincipal
@@ -44,6 +47,7 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         trocaTelas(viewHome);
         visibilidadeBarraHorizontal(false);
         showLogoLabiocadHome(true);
+        
 
     }
 
@@ -303,6 +307,7 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                                 public void actionPerformed(ActionEvent e) {
 
                                     System.out.println("Criar Pasta");
+                                    //TODO verificar a criação de pasta usando a raiz da arvore, o erro que ocorre.
                                     ViewCriarPasta viewCriarPasta = new ViewCriarPasta(null, true);
                                     viewCriarPasta.setVisible(true);
 
@@ -313,6 +318,27 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     System.out.println("Remover");
+                                    System.out.println(ROOT);
+                                    File file = new File(ROOT);
+                                    
+                                    
+                                    int n = JOptionPane.showConfirmDialog(
+                                            null,
+                                        "Você deseja excluir ?",
+                                        "Excluir",
+                                        JOptionPane.YES_NO_OPTION);
+                                    
+                                    if (n == JOptionPane.YES_OPTION){
+                                        
+                                        if (removerArquivos(file)){
+                                            Alert.sucess("Excluído com sucesso", "Remover Diretório");
+                                            createRoot(ROOTWOKSPACE);
+                                    
+                                        }else Alert.error("Não foi possível excluir.", "Remover Diretório");
+                                    }
+                                    
+                                        
+                                    
                                 }
                             });
 
@@ -325,14 +351,22 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                     }
                 }
             });
-
-            ROOT = jTree2.getSelectionPath().getParentPath().getLastPathComponent().toString();
+           
+            
+            
+            XY = jTree2.getClosestRowForLocation(evt.getX(), evt.getY());
+            TreePath treePath = jTree2.getSelectionPath();
+            ROOT = "".trim();
+            for (int i = 0; i < treePath.getPathCount(); i++) {
+                ROOT += treePath.getPathComponent(i).toString().trim() + "/" ;
+            }
+            
+            
+            System.out.println("ViewP"+ROOT);
+            
             LAST_COMPONENT_ROOT = jTree2.getSelectionPath().getLastPathComponent().toString();
-
-            //ROOT = ROOT + "/" + LAST_COMPONENT_ROOT;
-            jTree2.setSelectionRow(jTree2.getClosestRowForLocation(evt.getX(), evt.getY()));
-
-            System.out.println("ViewPrincipal " + ROOT);
+            jTree2.setSelectionRow(XY);
+            
         }
 
     }//GEN-LAST:event_jTree2MouseClicked
@@ -349,6 +383,23 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         }
 
     }
+   
+    public boolean removerArquivos(File f) {
+            
+        try {
+            if (f.isDirectory()) {
+                File[] files = f.listFiles();
+                for (File file : files) {
+                    removerArquivos(file);
+                }
+            }
+            f.delete();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+        
+  }
 
     public static void trocaTelas(JInternalFrame tela) {
 
