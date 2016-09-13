@@ -12,7 +12,8 @@ import static view.ViewPrincipal.jDesktopPanePrincipal;
  *
  * @author Paulo Soza
  */
-public class ViewHome extends javax.swing.JInternalFrame {
+public class ViewHome extends javax.swing.JInternalFrame
+{
 
     /**
      * Creates new form ViewHome
@@ -145,11 +146,10 @@ public class ViewHome extends javax.swing.JInternalFrame {
 
     private void jButtonVisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVisualizarActionPerformed
 
-        ViewPrincipal viewPrincipal = new ViewPrincipal();
-        viewPrincipal.visibilidadeBarraHorizontal(true);
     }//GEN-LAST:event_jButtonVisualizarActionPerformed
 
     private void jButtonMontarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMontarActionPerformed
+
         ViewMontador viewMontador = new ViewMontador();
         jDesktopPanePrincipal.add(viewMontador);
         ViewPrincipal.trocaTelas(viewMontador);

@@ -5,13 +5,16 @@
  */
 package view;
 
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyVetoException;
 import java.io.File;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -26,12 +29,17 @@ import util.FileSystemModel;
  *
  * @author maverick
  */
-public final class ViewPrincipal extends javax.swing.JFrame {
+public final class ViewPrincipal extends javax.swing.JFrame
+{
 
+    // Telas
     public static final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
     public static final ViewHome viewHome = new ViewHome();
     public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
     public static final ViewMontador viewMontador = new ViewMontador();
+    public static final ViewNewbler viewNewbler = new ViewNewbler();
+
+    //Root da Raiz
     ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
     public static String ROOT = "".trim();
     public static String ROOTWOKSPACE;
@@ -47,7 +55,8 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         trocaTelas(viewHome);
         visibilidadeBarraHorizontal(false);
         showLogoLabiocadHome(true);
-        
+
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
 
     }
 
@@ -69,6 +78,20 @@ public final class ViewPrincipal extends javax.swing.JFrame {
 
         jTree2.setModel(new FileSystemModel(new File("/home/maverick/Documentos")));
 
+    }
+
+    public int getDimensaoWidthTela() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
+
+        return (int) d.getWidth();
+    }
+
+    public int getDimensaoHeigthTela() {
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
+
+        return (int) d.getHeight();
     }
 
     /**
@@ -291,7 +314,8 @@ public final class ViewPrincipal extends javax.swing.JFrame {
     private void jTree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MouseClicked
         if (evt.getButton() == MouseEvent.BUTTON3) {
 
-            jTree2.addMouseListener(new MouseAdapter() {
+            jTree2.addMouseListener(new MouseAdapter()
+            {
                 public void mousePressed(MouseEvent e) {
                     if (SwingUtilities.isRightMouseButton(e)) {
                         TreePath path = jTree2.getPathForLocation(e.getX(), e.getY());
@@ -302,7 +326,8 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                             JMenuItem itemCriarPasta = new JMenuItem("Criar Pasta");
                             JMenuItem itemRemover = new JMenuItem("Remover");
 
-                            itemCriarPasta.addActionListener(new ActionListener() {
+                            itemCriarPasta.addActionListener(new ActionListener()
+                            {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
 
@@ -314,31 +339,29 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                                 }
                             });
 
-                            itemRemover.addActionListener(new ActionListener() {
+                            itemRemover.addActionListener(new ActionListener()
+                            {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
                                     System.out.println("Remover");
                                     System.out.println(ROOT);
                                     File file = new File(ROOT);
-                                    
-                                    
+
                                     int n = JOptionPane.showConfirmDialog(
                                             null,
-                                        "Você deseja excluir ?",
-                                        "Excluir",
-                                        JOptionPane.YES_NO_OPTION);
-                                    
-                                    if (n == JOptionPane.YES_OPTION){
-                                        
-                                        if (removerArquivos(file)){
+                                            "Você deseja excluir ?",
+                                            "Excluir",
+                                            JOptionPane.YES_NO_OPTION);
+
+                                    if (n == JOptionPane.YES_OPTION)
+
+                                        if (removerArquivos(file)) {
                                             Alert.sucess("Excluído com sucesso", "Remover Diretório");
                                             createRoot(ROOTWOKSPACE);
-                                    
-                                        }else Alert.error("Não foi possível excluir.", "Remover Diretório");
-                                    }
-                                    
-                                        
-                                    
+
+                                        } else
+                                            Alert.error("Não foi possível excluir.", "Remover Diretório");
+
                                 }
                             });
 
@@ -351,22 +374,19 @@ public final class ViewPrincipal extends javax.swing.JFrame {
                     }
                 }
             });
-           
-            
-            
+
             XY = jTree2.getClosestRowForLocation(evt.getX(), evt.getY());
             TreePath treePath = jTree2.getSelectionPath();
             ROOT = "".trim();
             for (int i = 0; i < treePath.getPathCount(); i++) {
-                ROOT += treePath.getPathComponent(i).toString().trim() + "/" ;
+                ROOT += treePath.getPathComponent(i).toString().trim() + "/";
             }
-            
-            
-            System.out.println("ViewP"+ROOT);
-            
+
+            System.out.println("ViewP" + ROOT);
+
             LAST_COMPONENT_ROOT = jTree2.getSelectionPath().getLastPathComponent().toString();
             jTree2.setSelectionRow(XY);
-            
+
         }
 
     }//GEN-LAST:event_jTree2MouseClicked
@@ -383,9 +403,9 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         }
 
     }
-   
+
     public boolean removerArquivos(File f) {
-            
+
         try {
             if (f.isDirectory()) {
                 File[] files = f.listFiles();
@@ -398,8 +418,8 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             return false;
         }
-        
-  }
+
+    }
 
     public static void trocaTelas(JInternalFrame tela) {
 
@@ -407,6 +427,7 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         viewHome.setVisible(false);
         viewFiltrar.setVisible(false);
         viewMontador.setVisible(false);
+        viewNewbler.setVisible(false);
 
         if (tela != null) {
             tela.setVisible(true);
@@ -424,6 +445,7 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         jDesktopPanePrincipal.add(viewHome);
         jDesktopPanePrincipal.add(viewFiltrar);
         jDesktopPanePrincipal.add(viewMontador);
+        jDesktopPanePrincipal.add(viewNewbler);
 
         try {
 
@@ -431,6 +453,7 @@ public final class ViewPrincipal extends javax.swing.JFrame {
             viewHome.setMaximum(true);
             viewFiltrar.setMaximum(true);
             viewMontador.setMaximum(true);
+            viewNewbler.setMaximum(true);
 
         } catch (PropertyVetoException e) {
             System.err.println(" Exception maximizar internal\n " + e);
@@ -465,7 +488,8 @@ public final class ViewPrincipal extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
             public void run() {
                 new ViewPrincipal().setVisible(true);
             }
