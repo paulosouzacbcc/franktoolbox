@@ -69,7 +69,7 @@ public class ViewNovoProjetoNewbler extends javax.swing.JDialog
 
         jLabel4.setText("Tipo de sequência:");
 
-        jComboBoxTipoSequencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTipoSequencia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Genomic", "cDNA", " " }));
 
         jCheckBox1.setText("Criar projeto múltiplo:");
 
