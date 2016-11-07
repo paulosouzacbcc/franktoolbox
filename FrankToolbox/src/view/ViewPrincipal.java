@@ -312,7 +312,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jTree2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTree2MouseClicked
-        if (evt.getButton() == MouseEvent.BUTTON3) {
+        if (evt.getButton() == MouseEvent.BUTTON1) {
 
             jTree2.addMouseListener(new MouseAdapter()
             {
