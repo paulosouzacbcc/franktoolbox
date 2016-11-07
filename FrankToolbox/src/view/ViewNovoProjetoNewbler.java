@@ -156,7 +156,7 @@ public class ViewNovoProjetoNewbler extends javax.swing.JDialog
         int resultado;
         JFileChooser chooserDiretorio = new JFileChooser();
         chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setDialogTitle("Escolha o diretório de localização.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
 
         if (resultado == JFileChooser.APPROVE_OPTION) {

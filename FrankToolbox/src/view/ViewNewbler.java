@@ -5,6 +5,10 @@
  */
 package view;
 
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.apache.commons.io.FilenameUtils;
 import util.Internal;
 
 /**
@@ -17,6 +21,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     /**
      * Creates new form ViewNewbler
      */
+    int resultado;
+    JFileChooser chooserDiretorio = new JFileChooser();
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fastq", "fasta", "sff");
+    
+    
     public ViewNewbler() {
         initComponents();
         Internal.retiraBotao(this);
@@ -47,7 +56,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jTextField22 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel26 = new javax.swing.JLabel();
-        jTextField23 = new javax.swing.JTextField();
+        jTextFieldInputFile = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jComboBox3 = new javax.swing.JComboBox<>();
         jPanelParametro = new javax.swing.JPanel();
@@ -155,11 +164,16 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "--Selecione um projeto--", "Projeto 1", "Projeto 2", "Projeto 3" }));
 
-        jLabel26.setText("Importar arquivo:");
+        jLabel26.setText("Input file:");
 
-        jTextField23.setEditable(false);
+        jTextFieldInputFile.setEditable(false);
 
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inputfile15x15-2.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Unpaired", "Paired" }));
 
@@ -171,24 +185,23 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                 .addContainerGap()
                 .addGroup(jPanelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jComboBox3, 0, 230, Short.MAX_VALUE)
-                    .addGroup(jPanelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel19)
-                        .addComponent(jLabel20)
-                        .addComponent(jTextField18, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
-                        .addComponent(jLabel21)
-                        .addComponent(jTextField19)
-                        .addComponent(jLabel22)
-                        .addComponent(jTextField20)
-                        .addComponent(jLabel23)
-                        .addComponent(jTextField21)
-                        .addComponent(jLabel24)
-                        .addComponent(jTextField22)
-                        .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel26)
-                        .addComponent(jTextField23)))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField18, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField20, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField21, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel24, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField22, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel26, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.Alignment.LEADING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5)
-                .addContainerGap(350, Short.MAX_VALUE))
+                .addContainerGap(354, Short.MAX_VALUE))
         );
         jPanelProjetoLayout.setVerticalGroup(
             jPanelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +234,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelProjetoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -310,7 +323,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                     .addComponent(jLabel6)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addGap(0, 80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -349,6 +362,8 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         );
 
         jTabbedPane2.addTab("Input", jPanel1);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Newbler", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jCheckBox3.setText("Incremental de novo assembler analysis");
 
@@ -452,7 +467,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
                     .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 70, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -474,7 +489,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                             .addComponent(jCheckBox5)
                             .addComponent(jCheckBox4)
                             .addComponent(jCheckBox3))
-                        .addGap(129, 374, Short.MAX_VALUE))))
+                        .addGap(129, 303, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,6 +511,8 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         );
 
         jTabbedPane2.addTab("Computation", jPanel4);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Newbler", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jCheckBox7.setText("Include Consensus");
 
@@ -758,7 +775,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 490, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonProcessar)
@@ -767,6 +784,22 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+         
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            jTextFieldInputFile.setText(selectedFile.getName());
+            String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButtonNovoProjetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovoProjetoActionPerformed
         ViewNovoProjetoNewbler viewNovoProjetoNewbler = new ViewNovoProjetoNewbler(null, true);
@@ -862,7 +895,6 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -870,5 +902,6 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextFieldInputFile;
     // End of variables declaration//GEN-END:variables
 }
