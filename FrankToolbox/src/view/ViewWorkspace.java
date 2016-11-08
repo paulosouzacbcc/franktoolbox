@@ -145,6 +145,7 @@ public class ViewWorkspace extends javax.swing.JDialog
 
         if (!jTextFieldPath.getText().isEmpty()) {
 
+            ViewPrincipal.ROOTWOKSPACE = getPath();
             ViewPrincipal.createRoot(getPath());
             this.dispose();
 
