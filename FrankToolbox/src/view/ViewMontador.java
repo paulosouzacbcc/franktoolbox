@@ -47,6 +47,11 @@ public class ViewMontador extends javax.swing.JInternalFrame
         jButton3.setText("AbySS");
 
         jButton4.setText("SPAdes");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("IDBA-UD");
 
@@ -91,6 +96,12 @@ public class ViewMontador extends javax.swing.JInternalFrame
         ViewPrincipal.trocaTelas(viewNewbler);
 
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        ViewSpades viewSpades = new ViewSpades();
+        jDesktopPanePrincipal.add(viewSpades);
+        ViewPrincipal.trocaTelas(viewSpades);
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;

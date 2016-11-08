@@ -38,6 +38,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
     public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
     public static final ViewMontador viewMontador = new ViewMontador();
     public static final ViewNewbler viewNewbler = new ViewNewbler();
+    public static final ViewSpades viewSpades = new ViewSpades();
 
     //Root da Raiz
     ViewWorkspace viewWorkspace = new ViewWorkspace(null, true);
@@ -428,6 +429,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
         viewFiltrar.setVisible(false);
         viewMontador.setVisible(false);
         viewNewbler.setVisible(false);
+        viewSpades.setVisible(false);
 
         if (tela != null) {
             tela.setVisible(true);
@@ -445,6 +447,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
         jDesktopPanePrincipal.add(viewFiltrar);
         jDesktopPanePrincipal.add(viewMontador);
         jDesktopPanePrincipal.add(viewNewbler);
+        jDesktopPanePrincipal.add(viewSpades);
 
         try {
 
@@ -452,6 +455,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
             viewFiltrar.setMaximum(true);
             viewMontador.setMaximum(true);
             viewNewbler.setMaximum(true);
+            viewSpades.setMaximum(true);
 
         } catch (PropertyVetoException e) {
             System.err.println(" Exception maximizar internal\n " + e);
