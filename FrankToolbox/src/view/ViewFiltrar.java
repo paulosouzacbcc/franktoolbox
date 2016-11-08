@@ -267,7 +267,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        JFileChooser chooserDiretorio = new JFileChooser();
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setFileFilter(filter);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
@@ -287,7 +287,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
 
-        JFileChooser chooserDiretorio = new JFileChooser();
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooserDiretorio.setDialogTitle("Escolha o diretório de saida.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
@@ -303,7 +303,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         
-        JFileChooser chooserDiretorio = new JFileChooser();
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setFileFilter(filter);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         resultado = chooserDiretorio.showOpenDialog(getParent());
@@ -323,7 +323,7 @@ public class ViewFiltrar extends javax.swing.JInternalFrame
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
-        JFileChooser chooserDiretorio = new JFileChooser();
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         chooserDiretorio.setDialogTitle("Escolha o diretório de saida.");
         resultado = chooserDiretorio.showOpenDialog(getParent());

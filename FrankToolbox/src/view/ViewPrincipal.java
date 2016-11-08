@@ -33,7 +33,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
 {
 
     // Telas
-    public static final ViewImportarArquivo viewImportarArquivo = new ViewImportarArquivo();
+    
     public static final ViewHome viewHome = new ViewHome();
     public static final ViewFiltrar viewFiltrar = new ViewFiltrar();
     public static final ViewMontador viewMontador = new ViewMontador();
@@ -423,7 +423,7 @@ public final class ViewPrincipal extends javax.swing.JFrame
 
     public static void trocaTelas(JInternalFrame tela) {
 
-        viewImportarArquivo.setVisible(false);
+        
         viewHome.setVisible(false);
         viewFiltrar.setVisible(false);
         viewMontador.setVisible(false);
@@ -441,7 +441,6 @@ public final class ViewPrincipal extends javax.swing.JFrame
 
     public void iniciarTelas() {
 
-        jDesktopPanePrincipal.add(viewImportarArquivo);
         jDesktopPanePrincipal.add(viewHome);
         jDesktopPanePrincipal.add(viewFiltrar);
         jDesktopPanePrincipal.add(viewMontador);
@@ -449,7 +448,6 @@ public final class ViewPrincipal extends javax.swing.JFrame
 
         try {
 
-            viewImportarArquivo.setMaximum(true);
             viewHome.setMaximum(true);
             viewFiltrar.setMaximum(true);
             viewMontador.setMaximum(true);

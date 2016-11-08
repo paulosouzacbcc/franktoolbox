@@ -22,7 +22,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
      * Creates new form ViewNewbler
      */
     int resultado;
-    JFileChooser chooserDiretorio = new JFileChooser();
+    
     FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fastq", "fasta", "sff");
     
     
@@ -73,10 +73,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jTextFieldTrimmingDatabase = new javax.swing.JTextField();
+        jTextFieldScreeningDatabase = new javax.swing.JTextField();
+        jTextFieldExcludeFilter = new javax.swing.JTextField();
+        jTextFieldIncludeFilter = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -268,12 +268,32 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jLabel6.setText("Include filter file:");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inputfile15x15-2.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inputfile15x15-2.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inputfile15x15-2.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inputfile15x15-2.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -289,10 +309,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField4)
-                    .addComponent(jTextField5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                    .addComponent(jTextFieldTrimmingDatabase)
+                    .addComponent(jTextFieldScreeningDatabase)
+                    .addComponent(jTextFieldExcludeFilter)
+                    .addComponent(jTextFieldIncludeFilter, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton1)
@@ -306,22 +326,22 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTrimmingDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldScreeningDatabase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldExcludeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldIncludeFilter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(0, 80, Short.MAX_VALUE))
         );
@@ -787,6 +807,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
          
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         chooserDiretorio.setFileFilter(filter);
         resultado = chooserDiretorio.showOpenDialog(getParent());
@@ -795,7 +816,6 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
             File selectedFile = chooserDiretorio.getSelectedFile();
             jTextFieldInputFile.setText(selectedFile.getName());
-            String fileNameWithOutExt = FilenameUtils.removeExtension(selectedFile.getName());
 
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
@@ -805,6 +825,73 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         ViewNovoProjetoNewbler viewNovoProjetoNewbler = new ViewNovoProjetoNewbler(null, true);
         viewNovoProjetoNewbler.setVisible(true);
     }//GEN-LAST:event_jButtonNovoProjetoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            jTextFieldTrimmingDatabase.setText(selectedFile.getName());
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            jTextFieldScreeningDatabase.setText(selectedFile.getName());
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            jTextFieldExcludeFilter.setText(selectedFile.getName());
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            jTextFieldIncludeFilter.setText(selectedFile.getName());
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -895,13 +982,13 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextFieldExcludeFilter;
+    private javax.swing.JTextField jTextFieldIncludeFilter;
     private javax.swing.JTextField jTextFieldInputFile;
+    private javax.swing.JTextField jTextFieldScreeningDatabase;
+    private javax.swing.JTextField jTextFieldTrimmingDatabase;
     // End of variables declaration//GEN-END:variables
 }

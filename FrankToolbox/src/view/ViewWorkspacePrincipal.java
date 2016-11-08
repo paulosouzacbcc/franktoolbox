@@ -18,6 +18,9 @@ public class ViewWorkspacePrincipal extends javax.swing.JDialog
     /**
      * Creates new form ViewWorkspacePrincipal
      */
+    
+    static String workspace; 
+    
     public ViewWorkspacePrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
