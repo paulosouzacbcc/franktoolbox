@@ -24,6 +24,7 @@ public class ViewWorkspacePrincipal extends javax.swing.JDialog
     public ViewWorkspacePrincipal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setResizable(false);
         this.setLocationRelativeTo(this);
     }
 
