@@ -11,10 +11,7 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.table.TableColumn;
-import org.apache.commons.io.FilenameUtils;
 import util.Internal;
 import util.MyDefaultTableModel;
 
@@ -45,11 +42,8 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     public ViewNewbler() {
         initComponents();
         Internal.retiraBotao(this);
-        createTable();
-        createComboBox();
-        preencherTabela();
-        JcomboBoxJtable();
-      
+        
+        
 
     }
     
@@ -96,12 +90,13 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBoxTipoBiblioteca = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelInput = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableInput = new javax.swing.JTable();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        jButtonRemover = new javax.swing.JButton();
+        jButtonAdicionar = new javax.swing.JButton();
         jPanelProjeto = new javax.swing.JPanel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
@@ -198,51 +193,66 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jButtonProcessar = new javax.swing.JButton();
         jButtonNovoProjeto = new javax.swing.JButton();
 
+        jComboBoxTipoBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single ", "Paired" }));
+
         jTableInput.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {"", ""},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome do Arquivo", "Tipo de Biblioteca"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTableInput.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTableInput);
+        if (jTableInput.getColumnModel().getColumnCount() > 0) {
+            jTableInput.getColumnModel().getColumn(1).setResizable(false);
+            jTableInput.getColumnModel().getColumn(1).setCellEditor(null);
+        }
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
+        jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus15.png"))); // NOI18N
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus15.png"))); // NOI18N
+        jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButtonAdicionarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelInputLayout = new javax.swing.GroupLayout(jPanelInput);
+        jPanelInput.setLayout(jPanelInputLayout);
+        jPanelInputLayout.setHorizontalGroup(
+            jPanelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(jPanelInputLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton7)
+                .addComponent(jButtonAdicionar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton6))
+                .addComponent(jButtonRemover))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        jPanelInputLayout.setVerticalGroup(
+            jPanelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInputLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6)
-                    .addComponent(jButton7))
-                .addGap(0, 195, Short.MAX_VALUE))
+                .addGroup(jPanelInputLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonRemover)
+                    .addComponent(jButtonAdicionar))
+                .addGap(0, 196, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Input", jPanel2);
+        jTabbedPane1.addTab("Input", jPanelInput);
 
         jPanelProjeto.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Newbler", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -999,24 +1009,29 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButtonAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAdicionarActionPerformed
       
         JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
         chooserDiretorio.setFileFilter(filter);
         resultado = chooserDiretorio.showOpenDialog(getParent());
-
+        
         if (resultado == JFileChooser.APPROVE_OPTION) {
 
             File selectedFile = chooserDiretorio.getSelectedFile();
             arrayListPathName.add(selectedFile.toString());
+            
+            
+            
+            jTableInput.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(jTextField1));
+            jTableInput.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(jComboBoxTipoBiblioteca));
             
 
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
         
         preencherTabela();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -1024,10 +1039,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButtonAdicionar;
     private javax.swing.JButton jButtonNovoProjeto;
     private javax.swing.JButton jButtonProcessar;
+    private javax.swing.JButton jButtonRemover;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
@@ -1042,6 +1057,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JComboBox<String> jComboBoxTipoBiblioteca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1070,13 +1086,13 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelInput;
     private javax.swing.JPanel jPanelParametro;
     private javax.swing.JPanel jPanelProjeto;
     private javax.swing.JRadioButton jRadioButton1;
