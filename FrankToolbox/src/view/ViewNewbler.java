@@ -7,11 +7,15 @@ package view;
 
 import java.io.File;
 import java.util.ArrayList;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
+import javax.swing.JTable;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
 import util.Internal;
 import util.MyDefaultTableModel;
 
@@ -30,7 +34,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fastq", "fasta", "sff");
     
     ArrayList<String> arrayListPathFile = new ArrayList<>();
-    ArrayList<String> arrayListPathName = new ArrayList<>();
+    ArrayList<String> arrayListPathFileName = new ArrayList<>();
     ArrayList<String> arrayListTypeLibrary = new ArrayList<>();
     
     
@@ -38,16 +42,68 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private MyDefaultTableModel tableModel;
     private DefaultComboBoxModel comboBoxModel;
     
+    //Button Groups
+    
+    ButtonGroup buttonGroupPairwise = new ButtonGroup();
+    ButtonGroup buttonGroupAceFormat = new ButtonGroup();
+    ButtonGroup buttonGroupAceRead = new ButtonGroup();
+    ButtonGroup buttonGroupAlignment = new ButtonGroup();
+    
+    
     
     public ViewNewbler() {
         initComponents();
         Internal.retiraBotao(this);
+        addButtonsGroups();
         
-        JcomboBoxJtable();
+        jComboBoxBiblioteca.setSelectedIndex(0);
+        
+        
         
     }
   
+    public void addButtonsGroups(){
+        
+        buttonGroupAceFormat.add(jRadioButtonNoFiles);
+        buttonGroupAceFormat.add(jRadioButtonAceFilePerContig);
+        buttonGroupAceFormat.add(jRadioButtonSingleAceFileSmall);
+        buttonGroupAceFormat.add(jRadioButtonSingleAceFile);
+        buttonGroupAceFormat.add(jRadioButtonCompleteConsedFolder);
+        buttonGroupAceFormat.add(jRadioButtonConsed16);
+        
+        buttonGroupAceRead.add(jRadioButtonDefault);
+        buttonGroupAceRead.add(jRadioButtonRaw);
+        buttonGroupAceRead.add(jRadioButtonTrimmed);
+        
+        buttonGroupAlignment.add(jRadioButtonOutput);
+        buttonGroupAlignment.add(jRadioButtonOutputSmall);
+        buttonGroupAlignment.add(jRadioButtonNoOutput);
+        
+        buttonGroupPairwise.add(jRadioButtonNone);
+        buttonGroupPairwise.add(jRadioButtonSimpleFormat);
+        buttonGroupPairwise.add(jRadioButtonTabbedFormat);
+        
+        
+    }
     
+    public void setUpSportColumn(JTable table,
+                                 TableColumn sportColumn) {
+        //Set up the editor for the sport cells.
+        JComboBox comboBox = new JComboBox();
+        comboBox.addItem("Snowboarding");
+        comboBox.addItem("Rowing");
+        comboBox.addItem("Knitting");
+        comboBox.addItem("Speed reading");
+        comboBox.addItem("Pool");
+        comboBox.addItem("None of the above");
+        sportColumn.setCellEditor(new DefaultCellEditor(comboBox));
+
+        //Set up tool tips for the sport cells.
+        DefaultTableCellRenderer renderer =
+                new DefaultTableCellRenderer();
+        renderer.setToolTipText("Click for combo box");
+        sportColumn.setCellRenderer(renderer);
+    }
     
     public void createTable(){
         tableModel = new MyDefaultTableModel(new String[]{"Nome", "Tipo de Biblioteca"}, 0, false);
@@ -56,13 +112,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     
     public void preencherTabela(){
         
-        
-        for (int i = 0; i < arrayListPathName.size(); i++) {
-            
-            //jTableInput.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor());
-        }
-        
-        
+    
     }
     public void JcomboBoxJtable(){
 
@@ -82,7 +132,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBoxTipoBiblioteca = new javax.swing.JComboBox<>();
+        jComboBoxBiblioteca = new javax.swing.JComboBox<>();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanelInput = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -152,29 +202,29 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jTextField13 = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
-        jCheckBox10 = new javax.swing.JCheckBox();
+        jCheckBoxIncludeConsensus = new javax.swing.JCheckBox();
+        jCheckBoxReadsLimited = new javax.swing.JCheckBox();
+        jCheckBoxQuickOutput = new javax.swing.JCheckBox();
+        jCheckBoxOutputTrimmed = new javax.swing.JCheckBox();
         jPanel8 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButtonNone = new javax.swing.JRadioButton();
+        jRadioButtonSimpleFormat = new javax.swing.JRadioButton();
+        jRadioButtonTabbedFormat = new javax.swing.JRadioButton();
         jPanel9 = new javax.swing.JPanel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        jRadioButtonNoFiles = new javax.swing.JRadioButton();
+        jRadioButtonSingleAceFileSmall = new javax.swing.JRadioButton();
+        jRadioButtonSingleAceFile = new javax.swing.JRadioButton();
+        jRadioButtonAceFilePerContig = new javax.swing.JRadioButton();
+        jRadioButtonCompleteConsedFolder = new javax.swing.JRadioButton();
+        jRadioButtonConsed16 = new javax.swing.JRadioButton();
         jPanel10 = new javax.swing.JPanel();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton11 = new javax.swing.JRadioButton();
-        jRadioButton12 = new javax.swing.JRadioButton();
+        jRadioButtonDefault = new javax.swing.JRadioButton();
+        jRadioButtonRaw = new javax.swing.JRadioButton();
+        jRadioButtonTrimmed = new javax.swing.JRadioButton();
         jPanel11 = new javax.swing.JPanel();
-        jRadioButton13 = new javax.swing.JRadioButton();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jRadioButton15 = new javax.swing.JRadioButton();
+        jRadioButtonOutput = new javax.swing.JRadioButton();
+        jRadioButtonOutputSmall = new javax.swing.JRadioButton();
+        jRadioButtonNoOutput = new javax.swing.JRadioButton();
         jLabel16 = new javax.swing.JLabel();
         jTextField14 = new javax.swing.JTextField();
         jLabel17 = new javax.swing.JLabel();
@@ -185,7 +235,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jButtonProcessar = new javax.swing.JButton();
         jButtonNovoProjeto = new javax.swing.JButton();
 
-        jComboBoxTipoBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single ", "Paired" }));
+        jComboBoxBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single ", "Paired" }));
 
         jTableInput.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -197,15 +247,9 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             new String [] {
                 "Nome do Arquivo", "Biblioteca"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
+        jTableInput.setColumnSelectionAllowed(true);
+        jTableInput.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jTableInput.getTableHeader().setReorderingAllowed(false);
         jTableInput.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -213,8 +257,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             }
         });
         jScrollPane1.setViewportView(jTableInput);
+        jTableInput.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         if (jTableInput.getColumnModel().getColumnCount() > 0) {
-            jTableInput.getColumnModel().getColumn(1).setResizable(false);
+            jTableInput.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(jComboBoxBiblioteca)
+            );
         }
 
         jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
@@ -646,55 +692,55 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Newbler", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jCheckBox7.setText("Include Consensus");
+        jCheckBoxIncludeConsensus.setText("Include Consensus");
 
-        jCheckBox8.setText("Reads limited to one contig:");
+        jCheckBoxReadsLimited.setText("Reads limited to one contig:");
 
-        jCheckBox9.setText("Quick output:");
+        jCheckBoxQuickOutput.setText("Quick output:");
 
-        jCheckBox10.setText("Output trimmed reads");
+        jCheckBoxOutputTrimmed.setText("Output trimmed reads");
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pairwise Alignment:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton1.setText("None");
+        jRadioButtonNone.setText("None");
 
-        jRadioButton2.setText("Simple format");
+        jRadioButtonSimpleFormat.setText("Simple format");
 
-        jRadioButton3.setText("Tabbed format");
+        jRadioButtonTabbedFormat.setText("Tabbed format");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonNone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonSimpleFormat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonTabbedFormat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(348, 348, 348))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(jRadioButton1)
-                .addComponent(jRadioButton2)
-                .addComponent(jRadioButton3))
+                .addComponent(jRadioButtonNone)
+                .addComponent(jRadioButtonSimpleFormat)
+                .addComponent(jRadioButtonTabbedFormat))
         );
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ACE Format:", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton4.setText("No files");
+        jRadioButtonNoFiles.setText("No files");
 
-        jRadioButton5.setText("Single ACE file for small genomes");
+        jRadioButtonSingleAceFileSmall.setText("Single ACE file for small genomes");
 
-        jRadioButton6.setText("Single ACE file");
+        jRadioButtonSingleAceFile.setText("Single ACE file");
 
-        jRadioButton7.setText("ACE file per contig");
+        jRadioButtonAceFilePerContig.setText("ACE file per contig");
 
-        jRadioButton8.setText("Complete Consed folder");
+        jRadioButtonCompleteConsedFolder.setText("Complete Consed folder");
 
-        jRadioButton9.setText("Consed16");
+        jRadioButtonConsed16.setText("Consed16");
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -702,86 +748,86 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jRadioButtonNoFiles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRadioButtonAceFilePerContig, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jRadioButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jRadioButtonSingleAceFileSmall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRadioButtonCompleteConsedFolder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jRadioButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jRadioButtonSingleAceFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jRadioButtonConsed16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(jRadioButtonNoFiles)
+                    .addComponent(jRadioButtonSingleAceFileSmall)
+                    .addComponent(jRadioButtonSingleAceFile))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton8)
-                    .addComponent(jRadioButton9)))
+                    .addComponent(jRadioButtonAceFilePerContig)
+                    .addComponent(jRadioButtonCompleteConsedFolder)
+                    .addComponent(jRadioButtonConsed16)))
         );
 
         jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ACE Read Mode", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton10.setText("Default");
+        jRadioButtonDefault.setText("Default");
 
-        jRadioButton11.setText("Raw");
+        jRadioButtonRaw.setText("Raw");
 
-        jRadioButton12.setText("Trimmed");
+        jRadioButtonTrimmed.setText("Trimmed");
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jRadioButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonDefault, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonRaw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonTrimmed, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(414, 414, 414))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(jRadioButton10)
-                .addComponent(jRadioButton11)
-                .addComponent(jRadioButton12))
+                .addComponent(jRadioButtonDefault)
+                .addComponent(jRadioButtonRaw)
+                .addComponent(jRadioButtonTrimmed))
         );
 
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Alignment Info", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton13.setText("Output");
+        jRadioButtonOutput.setText("Output");
 
-        jRadioButton14.setText("Output small");
+        jRadioButtonOutputSmall.setText("Output small");
 
-        jRadioButton15.setText("No output");
+        jRadioButtonNoOutput.setText("No output");
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
         jPanel11Layout.setHorizontalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createSequentialGroup()
-                .addComponent(jRadioButton13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonOutputSmall, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jRadioButtonNoOutput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(372, 372, 372))
         );
         jPanel11Layout.setVerticalGroup(
             jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                .addComponent(jRadioButton13)
-                .addComponent(jRadioButton14)
-                .addComponent(jRadioButton15))
+                .addComponent(jRadioButtonOutput)
+                .addComponent(jRadioButtonOutputSmall)
+                .addComponent(jRadioButtonNoOutput))
         );
 
         jLabel16.setText("All contig threshold:");
@@ -825,12 +871,12 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox7)
-                            .addComponent(jCheckBox8))
+                            .addComponent(jCheckBoxIncludeConsensus)
+                            .addComponent(jCheckBoxReadsLimited))
                         .addGap(8, 8, 8)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox10)
-                            .addComponent(jCheckBox9))))
+                            .addComponent(jCheckBoxOutputTrimmed)
+                            .addComponent(jCheckBoxQuickOutput))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -838,12 +884,12 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox9))
+                    .addComponent(jCheckBoxIncludeConsensus)
+                    .addComponent(jCheckBoxQuickOutput))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox8)
-                    .addComponent(jCheckBox10))
+                    .addComponent(jCheckBoxReadsLimited)
+                    .addComponent(jCheckBoxOutputTrimmed))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1015,13 +1061,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         if (resultado == JFileChooser.APPROVE_OPTION) {
 
             File selectedFile = chooserDiretorio.getSelectedFile();
-            arrayListPathName.add(selectedFile.toString());
+            arrayListPathFile.add(selectedFile.toString());
+            arrayListPathFileName.add(selectedFile.getName());
             
-            
-            
-            
-            jTableInput.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(jComboBoxTipoBiblioteca));
-            
+            jTableInput.setValueAt(selectedFile.getName(), arrayListPathFile.size() - 1, 0);
 
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
@@ -1030,7 +1073,8 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
 
     private void jTableInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInputMouseClicked
-        
+
+    
 
     }//GEN-LAST:event_jTableInputMouseClicked
 
@@ -1045,20 +1089,20 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JButton jButtonProcessar;
     private javax.swing.JButton jButtonRemover;
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JCheckBox jCheckBoxIncludeConsensus;
+    private javax.swing.JCheckBox jCheckBoxOutputTrimmed;
+    private javax.swing.JCheckBox jCheckBoxQuickOutput;
+    private javax.swing.JCheckBox jCheckBoxReadsLimited;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBoxTipoBiblioteca;
+    private javax.swing.JComboBox<String> jComboBoxBiblioteca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1096,21 +1140,21 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     private javax.swing.JPanel jPanelInput;
     private javax.swing.JPanel jPanelParametro;
     private javax.swing.JPanel jPanelProjeto;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JRadioButton jRadioButtonAceFilePerContig;
+    private javax.swing.JRadioButton jRadioButtonCompleteConsedFolder;
+    private javax.swing.JRadioButton jRadioButtonConsed16;
+    private javax.swing.JRadioButton jRadioButtonDefault;
+    private javax.swing.JRadioButton jRadioButtonNoFiles;
+    private javax.swing.JRadioButton jRadioButtonNoOutput;
+    private javax.swing.JRadioButton jRadioButtonNone;
+    private javax.swing.JRadioButton jRadioButtonOutput;
+    private javax.swing.JRadioButton jRadioButtonOutputSmall;
+    private javax.swing.JRadioButton jRadioButtonRaw;
+    private javax.swing.JRadioButton jRadioButtonSimpleFormat;
+    private javax.swing.JRadioButton jRadioButtonSingleAceFile;
+    private javax.swing.JRadioButton jRadioButtonSingleAceFileSmall;
+    private javax.swing.JRadioButton jRadioButtonTabbedFormat;
+    private javax.swing.JRadioButton jRadioButtonTrimmed;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
