@@ -43,18 +43,10 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         initComponents();
         Internal.retiraBotao(this);
         
-        
-
-    }
-    
-    public void createComboBox(){
-        
-        comboBoxModel = new DefaultComboBoxModel();
-        
-        comboBoxModel.addElement("Single");
-        comboBoxModel.addElement("Paired");
+        JcomboBoxJtable();
         
     }
+  
     
     
     public void createTable(){
@@ -74,11 +66,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     }
     public void JcomboBoxJtable(){
 
-        JComboBox comboBox = new JComboBox();
+         JComboBox comboBox = new JComboBox();
          comboBox.addItem("Single");
          comboBox.addItem("Paired");
         
-        jTableInput.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(comboBox));
+        jTableInput.getColumn("Biblioteca").setCellEditor(new DefaultCellEditor(comboBox));
     }
 
     /**
@@ -203,7 +195,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
                 {null, null}
             },
             new String [] {
-                "Nome do Arquivo", "Tipo de Biblioteca"
+                "Nome do Arquivo", "Biblioteca"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -215,10 +207,14 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             }
         });
         jTableInput.getTableHeader().setReorderingAllowed(false);
+        jTableInput.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableInputMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTableInput);
         if (jTableInput.getColumnModel().getColumnCount() > 0) {
             jTableInput.getColumnModel().getColumn(1).setResizable(false);
-            jTableInput.getColumnModel().getColumn(1).setCellEditor(null);
         }
 
         jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
@@ -1023,7 +1019,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             
             
             
-            jTableInput.getColumnModel().getColumn(0).setCellEditor(new DefaultCellEditor(jTextField1));
+            
             jTableInput.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(jComboBoxTipoBiblioteca));
             
 
@@ -1032,6 +1028,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         
         preencherTabela();
     }//GEN-LAST:event_jButtonAdicionarActionPerformed
+
+    private void jTableInputMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableInputMouseClicked
+        
+
+    }//GEN-LAST:event_jTableInputMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
