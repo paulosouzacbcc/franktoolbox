@@ -264,6 +264,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         }
 
         jButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
+        jButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRemoverActionPerformed(evt);
+            }
+        });
 
         jButtonAdicionar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus15.png"))); // NOI18N
         jButtonAdicionar.addActionListener(new java.awt.event.ActionListener() {
@@ -1077,6 +1082,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
     
 
     }//GEN-LAST:event_jTableInputMouseClicked
+
+    private void jButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoverActionPerformed
+        
+        
+    }//GEN-LAST:event_jButtonRemoverActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
