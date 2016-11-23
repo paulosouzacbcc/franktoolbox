@@ -225,7 +225,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
         jTableInput.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null}
+
             },
             new String [] {
                 "Nome do Arquivo", "Biblioteca"
@@ -1016,10 +1016,11 @@ public class ViewNewbler extends javax.swing.JInternalFrame
             arrayListPathFile.add(selectedFile.toString());
             arrayListPathFileName.add(selectedFile.getName());
             
+            ((DefaultTableModel) jTableInput.getModel()).addRow(new Object[]{});
             jTableInput.setValueAt(selectedFile.getName(), arrayListPathFile.size() - 1, 0);
             jTableInput.setValueAt("Single", arrayListPathFile.size() - 1, 1);
             
-            ((DefaultTableModel) jTableInput.getModel()).addRow(new Object[]{});
+            
             
         } else if (resultado == JFileChooser.CANCEL_OPTION)
             System.out.println("Cancelado.");
