@@ -5,7 +5,15 @@
  */
 package view;
 
+import java.io.File;
+import java.util.ArrayList;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import util.Alert;
 import util.Internal;
+import static view.ViewNewbler.jTableInputNewbler;
 
 /**
  *
@@ -16,6 +24,16 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     /**
      * Creates new form ViewSpades
      */
+    
+    FileNameExtensionFilter filter = new FileNameExtensionFilter("FASTA files", "fastq", "fasta", "sff");
+    
+    ArrayList<String> arrayListPathFile = new ArrayList<>();
+    ArrayList<String> arrayListPathFileName = new ArrayList<>();
+    ArrayList<String> arrayListTypeLibrary = new ArrayList<>();
+    
+    int resultado;
+
+
     public ViewSpades() {
         initComponents();
         Internal.retiraBotao(this);
@@ -30,9 +48,15 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jComboBoxBiblioteca = new javax.swing.JComboBox<>();
+        jComboBoxTecnologia = new javax.swing.JComboBox<>();
         jTabbedPane2 = new javax.swing.JTabbedPane();
         jScrollPaneInput = new javax.swing.JScrollPane();
         jPanel4 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableInputSPAdes = new javax.swing.JTable();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
         jScrollPaneBasic = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -63,15 +87,70 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jCheckBox5 = new javax.swing.JCheckBox();
         jButtonProcessar = new javax.swing.JButton();
 
+        jComboBoxBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single-read", "Paired-end", "Mate-pair", "High-quality mate-pair", "Lucigen NxSeq® Long Mate Pair" }));
+
+        jComboBoxTecnologia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jTableInputSPAdes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Arquivo", "Tipo de Biblioteca", "Tecnologia"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableInputSPAdes);
+        if (jTableInputSPAdes.getColumnModel().getColumnCount() > 0) {
+            jTableInputSPAdes.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor (jComboBoxBiblioteca));
+            jTableInputSPAdes.getColumnModel().getColumn(2).setCellEditor(new DefaultCellEditor(jComboBoxTecnologia)
+            );
+        }
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/menos15x15.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus15.png"))); // NOI18N
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 748, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 736, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3)))
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 388, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton3)
+                    .addComponent(jButton5))
+                .addGap(0, 162, Short.MAX_VALUE))
         );
 
         jScrollPaneInput.setViewportView(jPanel4);
@@ -264,7 +343,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 429, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonProcessar))
         );
@@ -277,11 +356,52 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         viewInputNumberKMer.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        
+        JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setDialogTitle("Escolha o arquivo que deseja importar.");
+        chooserDiretorio.setFileFilter(filter);
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+        
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            File selectedFile = chooserDiretorio.getSelectedFile();
+            arrayListPathFile.add(selectedFile.toString());
+            arrayListPathFileName.add(selectedFile.getName());
+            
+            ((DefaultTableModel) jTableInputSPAdes.getModel()).addRow(new Object[]{});
+            jTableInputSPAdes.setValueAt(selectedFile.getName(), arrayListPathFile.size() - 1, 0);
+            jTableInputSPAdes.setValueAt("Single-read", arrayListPathFile.size() - 1, 1);
+            jTableInputSPAdes.setValueAt("TEcnologia", arrayListPathFile.size() - 1, 2);
+            
+            
+            
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        
+        
+            if (jTableInputSPAdes.getSelectedRow() == -1 ){
+            Alert.warning("Você deve selecionar uma linha na tabela", "Excluir linha");
+            return;
+        }
+        
+       ((DefaultTableModel) jTableInputSPAdes.getModel()).removeRow(jTableInputSPAdes.getSelectedRow());
+        arrayListPathFile.remove(jTableInputSPAdes.getSelectedRow() + 1);
+        arrayListPathFileName.remove(jTableInputSPAdes.getSelectedRow() + 1);
+        
+        System.out.println(arrayListPathFileName);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonProcessar;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
@@ -289,6 +409,8 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxBiblioteca;
+    private javax.swing.JComboBox<String> jComboBoxTecnologia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -300,11 +422,13 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPaneAdvanced;
     private javax.swing.JScrollPane jScrollPaneBasic;
     private javax.swing.JScrollPane jScrollPaneInput;
     private javax.swing.JScrollPane jScrollPanePipeline;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTable jTableInputSPAdes;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
