@@ -89,7 +89,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jComboBoxBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single-read", "Paired-end", "Mate-pair", "High-quality mate-pair", "Lucigen NxSeq® Long Mate Pair" }));
 
-        jComboBoxTecnologia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxTecnologia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ion Torrent", "PacBio", "454", "Iillumina" }));
 
         jTableInputSPAdes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -372,7 +372,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
             ((DefaultTableModel) jTableInputSPAdes.getModel()).addRow(new Object[]{});
             jTableInputSPAdes.setValueAt(selectedFile.getName(), arrayListPathFile.size() - 1, 0);
             jTableInputSPAdes.setValueAt("Single-read", arrayListPathFile.size() - 1, 1);
-            jTableInputSPAdes.setValueAt("TEcnologia", arrayListPathFile.size() - 1, 2);
+            jTableInputSPAdes.setValueAt("Ion Torrent", arrayListPathFile.size() - 1, 2);
             
             
             
