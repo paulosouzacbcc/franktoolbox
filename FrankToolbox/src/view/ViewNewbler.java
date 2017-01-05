@@ -228,7 +228,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
 
             },
             new String [] {
-                "Nome do Arquivo", "Biblioteca"
+                "Arquivo", "Biblioteca"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -889,7 +889,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         jPanelParametro.setLayout(jPanelParametroLayout);
         jPanelParametroLayout.setHorizontalGroup(
             jPanelParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 637, Short.MAX_VALUE)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 637, Short.MAX_VALUE)
         );
         jPanelParametroLayout.setVerticalGroup(
             jPanelParametroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -921,7 +921,7 @@ public class ViewNewbler extends javax.swing.JInternalFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 505, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 505, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonProcessar)

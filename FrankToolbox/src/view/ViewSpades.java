@@ -66,9 +66,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jScrollPaneAdvanced = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
@@ -77,9 +75,13 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldKmer = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
         jComboBoxCoverage = new javax.swing.JComboBox<>();
         jTextFieldCoverage = new javax.swing.JTextField();
+        jComboBoxKmer = new javax.swing.JComboBox<>();
+        jComboBoxThreads = new javax.swing.JComboBox<>();
+        jComboBoxMemory = new javax.swing.JComboBox<>();
+        jTextFieldThreads = new javax.swing.JTextField();
+        jTextFieldMemory = new javax.swing.JTextField();
         jScrollPanePipeline = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -96,6 +98,8 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jComboBoxBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single-read", "Paired-end", "Mate-pair", "High-quality mate-pair", "Lucigen NxSeq® Long Mate Pair" }));
 
         jComboBoxTecnologia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ion Torrent", "PacBio", "454", "Iillumina" }));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SPAdes", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jTableInputSPAdes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -167,7 +171,14 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Output directory: ");
 
+        jTextField1.setEditable(false);
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pasta15x15.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -205,7 +216,14 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Directory for temporary files:");
 
+        jTextField4.setEditable(false);
+
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pasta15x15.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jLabel5.setText("PHRED quality offset:");
 
@@ -215,14 +233,8 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jLabel7.setText("K-mer");
 
-        jTextFieldKmer.setEditable(false);
-
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/plus15.png"))); // NOI18N
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        jTextFieldKmer.setToolTipText("comma-separated list of k-mer sizes (must be odd and\tless than 128)");
+        jTextFieldKmer.setVisible(false);
 
         jComboBoxCoverage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "off", "auto", "number" }));
         jComboBoxCoverage.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +250,31 @@ public class ViewSpades extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBoxKmer.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "auto", "number" }));
+        jComboBoxKmer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxKmerActionPerformed(evt);
+            }
+        });
+
+        jComboBoxThreads.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "16", "number" }));
+        jComboBoxThreads.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxThreadsActionPerformed(evt);
+            }
+        });
+
+        jComboBoxMemory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "250", "number" }));
+        jComboBoxMemory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMemoryActionPerformed(evt);
+            }
+        });
+
+        jTextFieldThreads.setVisible(false);
+
+        jTextFieldMemory.setVisible(false);
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -252,21 +289,30 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                     .addComponent(jLabel6)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jTextFieldKmer)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBoxCoverage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton4)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBoxThreads, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxMemory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldMemory, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldThreads, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jComboBoxCoverage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxKmer, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextFieldKmer, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTextFieldCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
+                .addGap(215, 215, 215))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -274,11 +320,14 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxThreads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldThreads, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxMemory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldMemory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -295,11 +344,10 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                     .addComponent(jComboBoxCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jTextFieldKmer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jTextFieldKmer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxKmer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(110, Short.MAX_VALUE))
         );
 
@@ -403,11 +451,6 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        ViewInputNumberKMer viewInputNumberKMer = new ViewInputNumberKMer(null, true);
-        viewInputNumberKMer.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         
         JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
@@ -467,12 +510,43 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jComboBoxRestartFromActionPerformed
 
+    private void jComboBoxKmerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxKmerActionPerformed
+        if (jComboBoxKmer.getSelectedItem().equals("number")){
+            jTextFieldKmer.setVisible(true);
+        }else {
+            jTextFieldKmer.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxKmerActionPerformed
+
+    private void jComboBoxThreadsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxThreadsActionPerformed
+        if (jComboBoxThreads.getSelectedItem().equals("number")){
+            jTextFieldThreads.setVisible(true);
+        }else {
+            jTextFieldThreads.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxThreadsActionPerformed
+
+    private void jComboBoxMemoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMemoryActionPerformed
+        if (jComboBoxMemory.getSelectedItem().equals("number")){
+            jTextFieldMemory.setVisible(true);
+        }else {
+            jTextFieldMemory.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxMemoryActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonProcessar;
     private javax.swing.JCheckBox jCheckBox1;
@@ -485,8 +559,11 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxBiblioteca;
     private javax.swing.JComboBox<String> jComboBoxCoverage;
+    private javax.swing.JComboBox<String> jComboBoxKmer;
+    private javax.swing.JComboBox<String> jComboBoxMemory;
     private javax.swing.JComboBox<String> jComboBoxRestartFrom;
     private javax.swing.JComboBox<String> jComboBoxTecnologia;
+    private javax.swing.JComboBox<String> jComboBoxThreads;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -506,11 +583,11 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTableInputSPAdes;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldCoverage;
-    public static javax.swing.JTextField jTextFieldKmer;
+    private javax.swing.JTextField jTextFieldKmer;
+    private javax.swing.JTextField jTextFieldMemory;
     private javax.swing.JTextField jTextFieldRestartFrom;
+    private javax.swing.JTextField jTextFieldThreads;
     // End of variables declaration//GEN-END:variables
 }
