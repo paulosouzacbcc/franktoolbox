@@ -9,6 +9,7 @@ import java.io.File;
 import java.util.ArrayList;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import util.Alert;
@@ -74,10 +75,11 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldKmer = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
+        jComboBoxCoverage = new javax.swing.JComboBox<>();
+        jTextFieldCoverage = new javax.swing.JTextField();
         jScrollPanePipeline = new javax.swing.JScrollPane();
         jPanel3 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
@@ -85,6 +87,10 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jCheckBox3 = new javax.swing.JCheckBox();
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
+        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBox7 = new javax.swing.JCheckBox();
+        jComboBoxRestartFrom = new javax.swing.JComboBox<>();
+        jTextFieldRestartFrom = new javax.swing.JTextField();
         jButtonProcessar = new javax.swing.JButton();
 
         jComboBoxBiblioteca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single-read", "Paired-end", "Mate-pair", "High-quality mate-pair", "Lucigen NxSeq® Long Mate Pair" }));
@@ -218,6 +224,20 @@ public class ViewSpades extends javax.swing.JInternalFrame {
             }
         });
 
+        jComboBoxCoverage.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "off", "auto", "number" }));
+        jComboBoxCoverage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxCoverageActionPerformed(evt);
+            }
+        });
+
+        jTextFieldCoverage.setVisible(false);
+        jTextFieldCoverage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldCoverageActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -233,12 +253,16 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldKmer))
+                    .addComponent(jTextFieldKmer)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jComboBoxCoverage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton2)
@@ -268,14 +292,15 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCoverage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(jTextFieldKmer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         jScrollPaneAdvanced.setViewportView(jPanel2);
@@ -294,6 +319,19 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jCheckBox5.setText("--disable-gzip-output");
 
+        jCheckBox6.setText("--disable-rr");
+
+        jCheckBox7.setText("--restart-from");
+
+        jComboBoxRestartFrom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ec", "as", "k-mer", "mc" }));
+        jComboBoxRestartFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxRestartFromActionPerformed(evt);
+            }
+        });
+
+        jTextFieldRestartFrom.setVisible(false);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -305,8 +343,15 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                     .addComponent(jCheckBox2)
                     .addComponent(jCheckBox3)
                     .addComponent(jCheckBox4)
-                    .addComponent(jCheckBox5))
-                .addContainerGap(628, Short.MAX_VALUE))
+                    .addComponent(jCheckBox5)
+                    .addComponent(jCheckBox6)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jCheckBox7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(542, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,8 +365,15 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBox4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBox7)
+                    .addComponent(jComboBoxRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
                 .addComponent(jCheckBox5)
-                .addContainerGap(229, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jCheckBox6)
+                .addContainerGap(164, Short.MAX_VALUE))
         );
 
         jScrollPanePipeline.setViewportView(jPanel3);
@@ -395,6 +447,26 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         System.out.println(arrayListPathFileName);
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void jTextFieldCoverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldCoverageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldCoverageActionPerformed
+
+    private void jComboBoxCoverageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxCoverageActionPerformed
+        if (jComboBoxCoverage.getSelectedItem().equals("number")){
+            jTextFieldCoverage.setVisible(true);
+        }else {
+            jTextFieldCoverage.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxCoverageActionPerformed
+
+    private void jComboBoxRestartFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxRestartFromActionPerformed
+        if (jComboBoxRestartFrom.getSelectedItem().equals("k-mer")){
+            jTextFieldRestartFrom.setVisible(true);
+        }else {
+            jTextFieldRestartFrom.setVisible(false);
+        }
+    }//GEN-LAST:event_jComboBoxRestartFromActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -408,8 +480,12 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
+    private javax.swing.JCheckBox jCheckBox6;
+    private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxBiblioteca;
+    private javax.swing.JComboBox<String> jComboBoxCoverage;
+    private javax.swing.JComboBox<String> jComboBoxRestartFrom;
     private javax.swing.JComboBox<String> jComboBoxTecnologia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -433,7 +509,8 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextFieldCoverage;
     public static javax.swing.JTextField jTextFieldKmer;
+    private javax.swing.JTextField jTextFieldRestartFrom;
     // End of variables declaration//GEN-END:variables
 }
