@@ -61,14 +61,14 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jScrollPaneBasic = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldOutputDirectory = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPaneAdvanced = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldDiretoryTemporaryFiles = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -90,7 +90,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
         jCheckBox4 = new javax.swing.JCheckBox();
         jCheckBox5 = new javax.swing.JCheckBox();
         jCheckBox6 = new javax.swing.JCheckBox();
-        jCheckBox7 = new javax.swing.JCheckBox();
+        jCheckBoxRestartFrom = new javax.swing.JCheckBox();
         jComboBoxRestartFrom = new javax.swing.JComboBox<>();
         jTextFieldRestartFrom = new javax.swing.JTextField();
         jButtonProcessar = new javax.swing.JButton();
@@ -171,7 +171,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jLabel1.setText("Output directory: ");
 
-        jTextField1.setEditable(false);
+        jTextFieldOutputDirectory.setEditable(false);
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pasta15x15.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -188,7 +188,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
                 .addContainerGap(279, Short.MAX_VALUE))
@@ -199,7 +199,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldOutputDirectory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addContainerGap(395, Short.MAX_VALUE))
         );
@@ -216,7 +216,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Directory for temporary files:");
 
-        jTextField4.setEditable(false);
+        jTextFieldDiretoryTemporaryFiles.setEditable(false);
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/pasta15x15.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +300,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                             .addComponent(jTextFieldThreads, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDiretoryTemporaryFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jComboBoxCoverage, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -332,7 +332,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldDiretoryTemporaryFiles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButton2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -369,9 +369,15 @@ public class ViewSpades extends javax.swing.JInternalFrame {
 
         jCheckBox6.setText("--disable-rr");
 
-        jCheckBox7.setText("--restart-from");
+        jCheckBoxRestartFrom.setText("--restart-from");
+        jCheckBoxRestartFrom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRestartFromActionPerformed(evt);
+            }
+        });
 
         jComboBoxRestartFrom.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ec", "as", "k-mer", "mc" }));
+        jComboBoxRestartFrom.setVisible(false);
         jComboBoxRestartFrom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxRestartFromActionPerformed(evt);
@@ -394,7 +400,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                     .addComponent(jCheckBox5)
                     .addComponent(jCheckBox6)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jCheckBox7)
+                        .addComponent(jCheckBoxRestartFrom)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -414,7 +420,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
                 .addComponent(jCheckBox4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox7)
+                    .addComponent(jCheckBoxRestartFrom)
                     .addComponent(jComboBoxRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextFieldRestartFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(7, 7, 7)
@@ -535,12 +541,45 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jComboBoxMemoryActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+ JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
         
+        chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooserDiretorio.setDialogTitle("Escolha o diretório temporário de arquivos.");
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            String path = chooserDiretorio.getSelectedFile().getPath();
+            jTextFieldDiretoryTemporaryFiles.setText(path);
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+         JFileChooser chooserDiretorio = new JFileChooser(ViewPrincipal.ROOTWOKSPACE);
+        chooserDiretorio.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        chooserDiretorio.setDialogTitle("Escolha o diretório de saida.");
+        resultado = chooserDiretorio.showOpenDialog(getParent());
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+
+            String path = chooserDiretorio.getSelectedFile().getPath();
+            jTextFieldOutputDirectory.setText(path);
+
+        } else if (resultado == JFileChooser.CANCEL_OPTION)
+            System.out.println("Cancelado.");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jCheckBoxRestartFromActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRestartFromActionPerformed
+        if (jCheckBoxRestartFrom.isSelected()){
+            jComboBoxRestartFrom.setVisible(true);
+        }else {
+            jComboBoxRestartFrom.setVisible(false);
+        }
+    }//GEN-LAST:event_jCheckBoxRestartFromActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -555,7 +594,7 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JCheckBox jCheckBox6;
-    private javax.swing.JCheckBox jCheckBox7;
+    private javax.swing.JCheckBox jCheckBoxRestartFrom;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBoxBiblioteca;
     private javax.swing.JComboBox<String> jComboBoxCoverage;
@@ -582,11 +621,11 @@ public class ViewSpades extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPanePipeline;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTable jTableInputSPAdes;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextFieldCoverage;
+    private javax.swing.JTextField jTextFieldDiretoryTemporaryFiles;
     private javax.swing.JTextField jTextFieldKmer;
     private javax.swing.JTextField jTextFieldMemory;
+    private javax.swing.JTextField jTextFieldOutputDirectory;
     private javax.swing.JTextField jTextFieldRestartFrom;
     private javax.swing.JTextField jTextFieldThreads;
     // End of variables declaration//GEN-END:variables
