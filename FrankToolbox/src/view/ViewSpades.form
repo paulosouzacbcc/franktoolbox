@@ -2,7 +2,7 @@
 
 <Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.JComboBox" name="jComboBoxBiblioteca">
+    <Component class="javax.swing.JComboBox" name="jComboBoxTipoBiblioteca">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -21,11 +21,37 @@
     <Component class="javax.swing.JComboBox" name="jComboBoxTecnologia">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
+          <StringArray count="11">
             <StringItem index="0" value="Ion Torrent"/>
             <StringItem index="1" value="PacBio"/>
             <StringItem index="2" value="454"/>
             <StringItem index="3" value="Iillumina"/>
+            <StringItem index="4" value="Sc"/>
+            <StringItem index="5" value="Rna"/>
+            <StringItem index="6" value="Sanger"/>
+            <StringItem index="7" value="Pacbio"/>
+            <StringItem index="8" value="Nanopore"/>
+            <StringItem index="9" value="Trusted-contigs"/>
+            <StringItem index="10" value="Untrusted-contigs "/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxBiblioteca">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="8">
+            <StringItem index="0" value="1"/>
+            <StringItem index="1" value="2"/>
+            <StringItem index="2" value="3"/>
+            <StringItem index="3" value="4"/>
+            <StringItem index="4" value="5"/>
+            <StringItem index="5" value="6"/>
+            <StringItem index="6" value="7"/>
+            <StringItem index="7" value=" "/>
           </StringArray>
         </Property>
       </Properties>
@@ -137,10 +163,11 @@
                     <Component class="javax.swing.JTable" name="jTableInputSPAdes">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                          <Table columnCount="3" rowCount="0">
+                          <Table columnCount="4" rowCount="0">
                             <Column editable="false" title="Arquivo" type="java.lang.Object"/>
                             <Column editable="true" title="Tipo de Biblioteca" type="java.lang.Object"/>
                             <Column editable="true" title="Tecnologia" type="java.lang.Object"/>
+                            <Column editable="true" title="Biblioteca" type="java.lang.Object"/>
                           </Table>
                         </Property>
                         <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -153,7 +180,7 @@
                             <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                               <Title/>
                               <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                                <Connection code="new DefaultCellEditor (jComboBoxBiblioteca)" type="code"/>
+                                <Connection code="new DefaultCellEditor (jComboBoxTipoBiblioteca)" type="code"/>
                               </Editor>
                               <Renderer/>
                             </Column>
@@ -161,6 +188,13 @@
                               <Title/>
                               <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                                 <Connection code="new DefaultCellEditor(jComboBoxTecnologia)&#xa;" type="code"/>
+                              </Editor>
+                              <Renderer/>
+                            </Column>
+                            <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                              <Title/>
+                              <Editor editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                                <Connection code="new DefaultCellEditor (jComboBoxBiblioteca));&#xd;&#xa;jComboBoxBiblioteca.setEnabled(false);&#xd;&#xa;&#xd;&#xa;if (jComboBoxTipoBiblioteca.getSelectedItem().equals(&quot;Paired-end&quot;) || jComboBoxTipoBiblioteca.getSelectedItem().equals(&quot;Meta-pair&quot;)){&#xd;&#xa;    jComboBoxBiblioteca.setEnabled(true);&#xd;&#xa;}&#xd;&#xa;" type="code"/>
                               </Editor>
                               <Renderer/>
                             </Column>
@@ -581,6 +615,8 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jTextFieldRestartFrom" min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="jCheckBox7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jCheckBox8" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="542" max="32767" attributes="0"/>
                       </Group>
@@ -607,7 +643,11 @@
                           <Component id="jCheckBox5" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jCheckBox6" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="164" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBox7" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jCheckBox8" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace pref="141" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -674,6 +714,16 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="jTextFieldRestartFrom.setVisible(false);"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBox7">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="--meta"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JCheckBox" name="jCheckBox8">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="--plasmid"/>
+                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
